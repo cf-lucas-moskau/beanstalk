@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { experiments, projects } from '../../../data';
+import { experiments, pitches } from '../../../data';
 
 // @ts-ignore
 export function load({ params }) {
@@ -9,6 +9,6 @@ export function load({ params }) {
 
 	return {
 		experiment: experiment,
-		projects: projects.filter((project) => experiment.projects.includes(project.id))
+		pitches: pitches.filter((pitch) => experiment.pitches.includes(pitch.id))
 	};
 }

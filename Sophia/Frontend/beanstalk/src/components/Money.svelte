@@ -1,10 +1,18 @@
 <script lang="ts">
     export let amount: number = 0;
     export let currency: string = '$';
+
+    import { investment } from "../stores/investment";
+
+    function updateInvestment() {
+      investment.reduce((value) => value - 1);
+    }
+
   </script>
   
   <div class="money-box">
-    <div class="amount">{currency}{amount.toFixed(2)}</div>
+    <div class="amount">{currency}{$investment.toFixed(2)}</div>
+    <button on:click={updateInvestment}>Reduce</button>
   </div>
   
   <style>

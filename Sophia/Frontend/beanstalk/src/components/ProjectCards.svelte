@@ -1,27 +1,22 @@
 <script lang="ts">
   import ProgressBar from "./ProgressBar.svelte";
 
-    export let projects: any[] = [];
+    export let pitches: any[] = [];
   </script>
   
   <div class="project-grid">
-    {#each projects as project, i}
+    {#each pitches as project, i}
       <!-- {#if i % 3 === 0}
         <div class="project-row">
       {/if} -->
-      <a href={`/project/${project.id}`}>
       <div class="project-card">
-        <img src={project.image} alt={project.title} />
-        <h2>{project.title}</h2>
-        <p>{project.description}</p>
-        <ProgressBar percentComplete={(project.funded / project.goal) * 100} />
-        <div class="project-stats">
-          <div class="project-funded">{project.funded} funded</div>
-          <div class="project-goal">{project.goal} goal</div>
-          <div class="project-days">{project.days} days left</div>
-        </div>
-      </div>
+        <img src={project.image} alt={project.name} />
+        <h2>{project.name}</h2>
+        <p>{project.productDescription}</p>
+        <a href={`/project/${project.id}`} class="learn-more">
+            Learn more
         </a>
+      </div>
       <!-- {#if (i + 1) % 3 === 0 || i === projects.length - 1}
         </div>
       {/if} -->
@@ -35,13 +30,6 @@
       justify-content: center;
       gap: 20px;
       padding: 20px;
-    }
-  
-    .project-row {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      margin-bottom: 20px;
     }
   
     .project-card {
@@ -71,37 +59,17 @@
       font-size: 16px;
       margin: 10px;
     }
-  
-    .progress-bar {
-      height: 10px;
-      background-color: #ddd;
-      margin: 10px;
-      position: relative;
-      left: 0px;
-      bottom: 10px;
-    }
-  
-    .project-stats {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      margin: 10px;
-    }
-  
-    .project-stats div {
-      font-size: 14px;
-    }
-  
-    .project-funded {
-      color: #2ecc71;
-    }
-  
-    .project-goal {
-      color: #e74c3c;
-    }
-  
-    .project-days {
-      color: #3498db;
+
+    .learn-more{
+        background-color: #3498db;
+        align-items: center;
+        text-align: center;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px;
+        margin: 10px;
+        width: 80%
     }
   </style>
   

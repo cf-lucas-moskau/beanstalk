@@ -13,7 +13,7 @@
     <Money amount={200} currency={'€'} />
 {/if}
 <div>
-    <ProjectCards projects={data.projects} />
+    <ProjectCards pitches={data.pitches} />
 </div>
 </div>
 
