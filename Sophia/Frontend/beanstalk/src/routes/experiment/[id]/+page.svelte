@@ -1,5 +1,7 @@
 <script>
   import Money from "../../../components/Money.svelte";
+  import ProjectCards from "../../../components/ProjectCards.svelte";
+
 
 	export let data;
 </script>
@@ -10,7 +12,9 @@
 
     <Money amount={200} currency={'€'} />
 {/if}
-<div>{@html data.experiment.description}</div>
+<div>
+    <ProjectCards projects={data.projects} />
+</div>
 </div>
 
 
