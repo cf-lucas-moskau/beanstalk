@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let title: string = 'Beanstalk Accelerator';
-	export let logoSrc: string = 'src\lib\images\beanstalk_logo.png';
+	export let logoSrc: string = 'https://github.com/cf-lucas-moskau/beanstalk/blob/main/Sophia/Frontend/beanstalk/src/lib/images/beanstalk_logo.png';
 	export let aboutLink: string = '/about';
   </script>
   
