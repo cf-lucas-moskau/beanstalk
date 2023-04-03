@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let title: string = 'Beanstalk Accelerator';
-	export let logoSrc: string = 'https://logos-world.net/wp-content/uploads/2020/10/Kickstarter-Logo.png';
+	export let logoSrc: string = 'src\lib\images\beanstalk_logo.png';
 	export let aboutLink: string = '/about';
   </script>
   
