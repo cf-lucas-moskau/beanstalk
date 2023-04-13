@@ -1,5 +1,6 @@
 <script lang="ts">
   import ProgressBar from "./ProgressBar.svelte";
+  import { currentExperiment } from "../stores/current-experiment";
 
     export let pitches: any[] = [];
   </script>
@@ -13,7 +14,7 @@
         <img src={project.image} alt={project.name} />
         <h2>{project.name}</h2>
         <p>{project.productDescription}</p>
-        <a href={`/project/${project.id}`} class="learn-more">
+        <a href={`/experiment/${$currentExperiment}/${project.id}`} class="learn-more">
             Learn more
         </a>
       </div>
