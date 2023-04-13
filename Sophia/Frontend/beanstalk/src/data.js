@@ -3,7 +3,7 @@ export const experiments = [
     {
         id: '98KLh34HGFe8',
         title: 'Experiment 1',
-        type: 'Friendship in students',
+        type: 'investment',
         description: '3-factorial (friendship ties: three strangers vs two friends and a stranger vs three friends) within-subjects design to examine the relationship between friendship ties and investment into different ETs (i.e., crowdfunding success) using a student population. Participants get access to a software that simulates a crowdfunding platform on which they read pitches (i.e., self-descriptions) of six ETs (two in each condition). Participants can invest any amount of their participation money into the hypothetical ETs. Based on a simulation, participants receive a random return or loss for their investment into the different start-ups to heighten ecological validity. The money they gain or do not invest will be paid as participation fees. ',
         pitches: [
             "F0MI",
