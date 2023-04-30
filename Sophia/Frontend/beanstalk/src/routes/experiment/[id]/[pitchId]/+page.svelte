@@ -2,10 +2,13 @@
     import { onMount } from 'svelte';
     import { goto } from '$app/navigation';
     import { currentExperiment } from '../../../../stores/current-experiment.js';
+  import { experiments } from '../../../../data.js';
+  import InvestmentForm from '../../../../components/InvestmentForm.svelte';
     
     export let data;
     
     let pitch: any = null;
+    let investment = false;
     
     onMount(async () => {
       pitch = data.pitch
@@ -13,6 +16,10 @@
         goto('/404');
       }
     });
+    if ($currentExperiment !== '') {
+      // @ts-ignore
+      investment = experiments.find((e) => e.id === $currentExperiment).type === 'investment';
+    }
   </script>
   
   {#if pitch}
@@ -32,6 +39,9 @@
         <p>{pitch.productDescription}</p>
         <p>{pitch.teamDescription}</p>
         <button on:click={() => goto('/experiment/' + $currentExperiment)}>&larr; Back to Pitches</button>
+        {#if investment}
+        <InvestmentForm pitchId={data.pitch.id}/>
+        {/if}
       </div>
     </div>
   {:else}

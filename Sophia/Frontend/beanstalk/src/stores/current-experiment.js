@@ -16,4 +16,30 @@ function createCurrentExperiment() {
 	};
 }
 
+function createConsentForStudy() {
+	const { subscribe, update, set } = writable(false)
+
+	return {
+		// @ts-ignore
+        subscribe: subscribe,
+		// @ts-ignore
+		changeValue: update,
+		set,
+	};
+}
+
+function createConsentForData() {
+	const { subscribe, update, set } = writable(false)
+
+	return {
+		// @ts-ignore
+        subscribe: subscribe,
+		// @ts-ignore
+		changeValue: update,
+		set,
+	};
+}
+
 export const currentExperiment = createCurrentExperiment();
+export const consentForStudy = createConsentForStudy();
+export const consentForData = createConsentForData();

@@ -10,4 +10,15 @@ function createInvestment() {
 	};
 }
 
+function createInvestments() {
+	const { subscribe, update, set } = writable([{pitchId: "Test", amount: 500}]);
+
+	return {
+		subscribe,
+		update,
+		set,
+	};
+}
+
 export const investment = createInvestment();
+export const investments = createInvestments();

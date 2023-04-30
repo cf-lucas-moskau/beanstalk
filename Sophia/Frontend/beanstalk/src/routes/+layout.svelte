@@ -1,4 +1,5 @@
 <script>
+	import Footer from '../components/Footer.svelte';
 	import Header from './Header.svelte';
 	import './styles.css';
 </script>
@@ -10,9 +11,7 @@
 		<slot />
 	</main>
 
-	<footer>
-		<p>This is Sophias Project</p>
-	</footer>
+	<Footer />
 </div>
 
 <style>
