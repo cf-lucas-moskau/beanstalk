@@ -1,6 +1,7 @@
 <script lang="ts">
     // Define the experiment data
     export let data;
+    
   </script>
 
     <div class="container">

@@ -1,5 +1,6 @@
 <script lang="ts">
   import ProgressBar from "./ProgressBar.svelte";
+  import { currentExperiment } from "../stores/current-experiment";
 
     export let pitches: any[] = [];
   </script>
@@ -12,18 +13,19 @@
       <div class="project-card">
         <img src={project.image} alt={project.name} />
         <h2>{project.name}</h2>
-        <p>{project.productDescription}</p>
-        <a href={`/project/${project.id}`} class="learn-more">
+        <p class="card-description">{project.productDescription}</p>
+        <a href={`/experiment/${$currentExperiment}/${project.id}`} class="learn-more">
             Learn more
         </a>
       </div>
-      <!-- {#if (i + 1) % 3 === 0 || i === projects.length - 1}
-        </div>
-      {/if} -->
     {/each}
   </div>
   
   <style>
+    .card-description{
+      height: 160px;
+    }
+
     .project-grid {
       display: flex;
       flex-wrap: wrap;
