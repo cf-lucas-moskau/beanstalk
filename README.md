@@ -1,10 +1,30 @@
 # Welcome to beanstalk
 
+
 ## What is this project for?
 
 This project was created for an experiment at UIO, the university of Oslo.
 
 Idea for the experiemnt is to gather information on how different factors influence the behaviour of investors.
+
+
+## How to get started
+
+You have to move into the repistory first. enter `cd Sophia/Frontend/beanstalk/` in the console
+
+Then run
+
+`npm install`
+
+to install the packages and then
+
+`npm run dev`
+
+to start the application.
+
+It will start running under
+
+`http://localhost:5173/`
 
 ## What is already there?
 
