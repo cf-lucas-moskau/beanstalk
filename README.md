@@ -36,22 +36,22 @@ The user can then invest in the startups. At the end the user can end the experi
 
 TODO
 
-[ ] For each experiment, the consent page needs to be specific. So when on the page `http://localhost:5173/?experiment=98KLh34HGFe8` we need to get the id of the experiment first, then need to get the corresponding consent data, that is stored in the `data.js` file and display that.
+[] For each experiment, the consent page needs to be specific. So when on the page `http://localhost:5173/?experiment=98KLh34HGFe8` we need to get the id of the experiment first, then need to get the corresponding consent data, that is stored in the `data.js` file and display that.
 
-[ ] After the consent page, the user needs to be redirected to a explanation page that explains experiment he is about to go on. This needs to be specific again. Similar to the consent page.
+[] After the consent page, the user needs to be redirected to a explanation page that explains experiment he is about to go on. This needs to be specific again. Similar to the consent page.
 
-[ ] Make the experiments display randomly. BUT only for one participant. So it should not be random everytime a participant goes onto the `/experiment` page but rather be determined ONCE.
+[] Make the experiments display randomly. BUT only for one participant. So it should not be random everytime a participant goes onto the `/experiment` page but rather be determined ONCE.
 
-[ ] If you click "invest" on a startup, you should get a pop up that asks you for the reason why you invested. There only needs to be a text area that allows the user to enter something, no checkbox or anything.
+[] If you click "invest" on a startup, you should get a pop up that asks you for the reason why you invested. There only needs to be a text area that allows the user to enter something, no checkbox or anything.
 
-[ ] At the end of an experiment we need to determine what the participant gets as return. It should be the amount left to invest + (+- 5% of the invested amount). Meaning the amount the participant invested has a chance of decreasing from -5% to +5%
+[] At the end of an experiment we need to determine what the participant gets as return. It should be the amount left to invest + (+- 5% of the invested amount). Meaning the amount the participant invested has a chance of decreasing from -5% to +5%
 
-[ ] Underneath the "Left to invest: " Box in the experiments overview there should be the investments you already did displayed underneath.
+[] Underneath the "Left to invest: " Box in the experiments overview there should be the investments you already did displayed underneath.
 
-[ ] On the experment site we should have the ability to adjust the invested amount. So the experiment site needs to know how much has alread been invested and then give the possibility to change that. This change should then trigger the pop up again where the participant needs to explain himself
+[] On the experment site we should have the ability to adjust the invested amount. So the experiment site needs to know how much has alread been invested and then give the possibility to change that. This change should then trigger the pop up again where the participant needs to explain himself
 
-[ ] TIME TRACKING: We need to implement time tracking. We need to know how long each participant spends on each site. This doesnt need to be specific, this can simply be saved by saving the routes. There should also be a click counter of each route.
+[] TIME TRACKING: We need to implement time tracking. We need to know how long each participant spends on each site. This doesnt need to be specific, this can simply be saved by saving the routes. There should also be a click counter of each route.
 
-[ ] Once the participant finishes the experiment, we need to save the data somewhere.
+[] Once the participant finishes the experiment, we need to save the data somewhere.
 
 
