@@ -2,8 +2,31 @@
 	import { consentForStudy, consentForData } from "../stores/current-experiment";
 	import { page } from '$app/stores';
 	import {goto} from '$app/navigation';
+  import {experiments} from '../data.js';
+  import {onMount} from 'svelte';
 
 	let invalidLink = false;
+  let experiment;
+  let eId;
+  let eTitle;
+  let eType;
+  let eDescription;
+  let ePitches;
+
+  onMount (() => {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    eId = urlParams.get('experiment');
+    experiment = experiments.find(exp => exp.id === eId);
+    console.log(eId);
+    console.log(experiment?.title);
+    //console.log(experiment);
+    eTitle = experiment?.title;
+    eType = experiment?.type;
+    eDescription = experiment?.description;
+    ePitches = experiment?.pitches;
+
+  });
 
 </script>
 
@@ -75,7 +98,11 @@ Sophia Humps (Project Leader) and Nina Junker (Supervisor)
 <br>
 <hr>
 <br>
-<h1>Consent Form</h1> 
+<h1>Consent Form for {eTitle}</h1>
+
+<h2><b>Type of experiment: {eType}</b></h2>
+
+<p>TODO: What else is "consent" data??</p>
 
 
 <label>I have received and understood information about the project “Start-up Investments” and have been given the opportunity to ask questions.</label>
@@ -93,7 +120,7 @@ Sophia Humps (Project Leader) and Nina Junker (Supervisor)
 	<button class="styled-button" disabled={!$consentForStudy || !$consentForData}
 		on:click={() => {
 			if ($page.url.searchParams.has('experiment')) {
-				goto('/experiment/' + $page.url.searchParams.get('experiment'));
+				goto('/experiment/' + $page.url.searchParams.get('experiment') + '/explanation');
 			} else {
 				invalidLink = true;
 			}
