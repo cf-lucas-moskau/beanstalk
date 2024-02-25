@@ -28,7 +28,6 @@
         <!-- 
             id: 'Jkiw83',
         name: 'Pitch 1',
-        productDescription: 'This is the first project',
         teamDescription: 'This is the first team',
         image:
          -->
@@ -36,7 +35,6 @@
       </div>
       <div class="project-details">
         <h1>{pitch.name}</h1>
-        <p>{pitch.productDescription}</p>
         <p>{pitch.teamDescription}</p>
         <button on:click={() => goto('/experiment/' + $currentExperiment)}>&larr; Back to Pitches</button>
         {#if investment}

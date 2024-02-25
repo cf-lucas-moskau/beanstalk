@@ -3,6 +3,15 @@
   import { currentExperiment } from "../stores/current-experiment";
 
     export let pitches: any[] = [];
+
+    function truncateText(text, words) {
+  const wordArray = text.split(' ');
+  if (wordArray.length > words) {
+    return wordArray.slice(0, words).join(' ') + '...';
+  }
+  return text;
+}
+
   </script>
   
   <div class="project-grid">
@@ -13,9 +22,9 @@
       <div class="project-card">
         <img src={project.image} alt={project.name} />
         <h2>{project.name}</h2>
-        <p class="card-description">{project.productDescription}</p>
+        <p class="card-description">{truncateText(project.teamDescription, 20)}</p>
         <a href={`/experiment/${$currentExperiment}/${project.id}`} class="learn-more">
-            Learn more
+            Mehr erfahren
         </a>
       </div>
     {/each}

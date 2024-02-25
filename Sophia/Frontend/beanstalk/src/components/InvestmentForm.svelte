@@ -109,7 +109,7 @@
 		<p>Success</p>
 	</div>
     {/if}
-    <p>{$investment} NOK left to invest</p>
+    <p>{$investment} € left to invest</p>
     <button class="investment-button" on:click="{handleInvest}" disabled={amount > $investment || amount <= 0}>
       Invest
     </button>
