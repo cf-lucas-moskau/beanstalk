@@ -1,21 +1,30 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount} from 'svelte';
+  import { writable } from 'svelte/store';
   import { experiments } from '../../data.js';
 
-  let shuffled = false;
-  let copy = experiments;
+  let isFirstVal;
+  let copy = [];
+  const isFirstLoad = writable(true);
 
-  //FIXME: Shuffles every time the page is renewed.
   onMount(() => {
+    console.log('called nMount');
+    isFirstLoad.subscribe(val => {
+      console.log('Subscribe called');
+      isFirstVal = val;
+    });
 
-    if (!shuffled) {
-      console.log('test');
-      console.log(experiments[0].id);
-      copy = shuffle([...experiments]);
-      console.log(copy);
-      shuffled = true;
+    if (isFirstVal) {
+      console.log('isFirstVal');
+      let storedExperiments = localStorage.getItem('experiments');
+      if (storedExperiments) {
+        copy = JSON.parse(storedExperiments);
+      } else {
+        copy = shuffle([...experiments]);
+        localStorage.setItem('experiments', JSON.stringify(copy));
+      }
+      isFirstLoad.set(false);
     }
-    
   });
 
 //Fisher-Yates shuffle from svelte documentation
@@ -29,7 +38,6 @@ function shuffle(array) {
   return array;
 }
 
-  
 </script>
 
   <div class="container">
