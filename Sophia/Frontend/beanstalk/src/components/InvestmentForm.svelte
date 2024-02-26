@@ -117,7 +117,7 @@
 	</div>
     {/if}
     <p>{$investment} € left to invest</p>
-    <button on:click="{openPopup}">TestInvest
+    <button class="investment-button" on:click="{openPopup}">TestInvest
     </button>
     {#if isPopupOpen}
       <button class="investment-button" on:click="{handleInvest}" disabled={amount > $investment || amount <= 0}>
