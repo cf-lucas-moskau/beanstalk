@@ -2,7 +2,7 @@
 <script lang="ts">
 
     import { investment, investments } from "../stores/investment";
-    import {Button} from "sveltestrap";
+
     let amount = 100;
     let unsufficientFunds = false;
     let successfulInvestment = false;
@@ -22,6 +22,7 @@
       $investments = [...$investments, { pitchId, amount }];
       investment.reduce(_investment => _investment - amount);
       successfulInvestment = true;
+      isPopupOpen = false;
     }
   </script>
   
