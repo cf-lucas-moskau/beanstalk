@@ -2,15 +2,21 @@
 <script lang="ts">
 
     import { investment, investments } from "../stores/investment";
+    import {Button} from "sveltestrap";
     let amount = 100;
     let unsufficientFunds = false;
     let successfulInvestment = false;
+    let isPopupOpen = false;
+    let inputValue = '';
 
 
     export let pitchId: string;
 
     $: amount > $investment ? unsufficientFunds = true : null;
-  
+
+    function openPopup() {
+      isPopupOpen = true;
+    }
     function handleInvest() {
       console.log(`Investing: ${amount}` + ` in pitch` + pitchId);
       $investments = [...$investments, { pitchId, amount }];
@@ -110,8 +116,11 @@
 	</div>
     {/if}
     <p>{$investment} € left to invest</p>
-    <button class="investment-button" on:click="{handleInvest}" disabled={amount > $investment || amount <= 0}>
-      Invest
+    <button on:click="{openPopup}">TestInvest
     </button>
+    {#if isPopupOpen}
+      <button class="investment-button" on:click="{handleInvest}" disabled={amount > $investment || amount <= 0}>
+        Invest
+      </button>
+    {/if}
   </div>
-  

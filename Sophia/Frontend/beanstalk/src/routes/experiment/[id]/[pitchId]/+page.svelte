@@ -17,6 +17,7 @@
       }
     });
     if ($currentExperiment !== '') {
+      console.log('current exp is: ' + $currentExperiment);
       // @ts-ignore
       investment = experiments.find((e) => e.id === $currentExperiment).type === 'investment';
     }

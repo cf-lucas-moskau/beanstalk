@@ -31,7 +31,7 @@ import {investments} from "../stores/investment";
     <a href="/terms-of-service">Terms of Service</a>
     <a href="/contact">Contact Us</a>
 
-<!--    Already on the page, no need for two sets of controls -->
+<!--    Already on the page, no need for two sets of controls-->
 <!--    <button on:click={() => {-->
 <!--        consentForStudy.set(!$consentForStudy);-->
 <!--    }}>{$consentForStudy}</button>-->
