@@ -39,6 +39,14 @@ function createConsentForData() {
 		set,
 	};
 }
+function truncateText(text, words) {
+	const wordArray = text.split(' ');
+	if (wordArray.length > words) {
+	  return wordArray.slice(0, words).join(' ') + '...';
+	}
+	return text;
+  }
+  
 
 export const currentExperiment = createCurrentExperiment();
 export const consentForStudy = createConsentForStudy();
