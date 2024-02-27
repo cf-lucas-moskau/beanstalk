@@ -26,6 +26,37 @@
     }
   </script>
   
+
+  <div class="investment-form">
+    <input
+      class="investment-input"
+      type="number"
+      step="10"
+      min="0"
+      placeholder="Enter investment amount"
+      bind:value="{amount}"
+    />
+    {#if unsufficientFunds}
+    <div class="invalid-div">
+		<p>Unsufficient Funds, lower investment</p>
+	</div>
+    {/if}
+    {#if successfulInvestment}
+    <div class="success-div">
+		<p>Success</p>
+	</div>
+    {/if}
+    <p>{$investment} € left to invest</p>
+    <button class="investment-button" on:click="{openPopup}">TestInvest
+    </button>
+    {#if isPopupOpen}
+      <button class="investment-button" on:click="{handleInvest}" disabled={amount > $investment || amount <= 0}>
+        Invest
+      </button>
+    {/if}
+  </div>
+
+
   <style>
     .investment-form {
       display: flex;
@@ -96,32 +127,3 @@
         width: 100%
 	}
   </style>
-  
-  <div class="investment-form">
-    <input
-      class="investment-input"
-      type="number"
-      step="10"
-      min="0"
-      placeholder="Enter investment amount"
-      bind:value="{amount}"
-    />
-    {#if unsufficientFunds}
-    <div class="invalid-div">
-		<p>Unsufficient Funds, lower investment</p>
-	</div>
-    {/if}
-    {#if successfulInvestment}
-    <div class="success-div">
-		<p>Success</p>
-	</div>
-    {/if}
-    <p>{$investment} € left to invest</p>
-    <button class="investment-button" on:click="{openPopup}">TestInvest
-    </button>
-    {#if isPopupOpen}
-      <button class="investment-button" on:click="{handleInvest}" disabled={amount > $investment || amount <= 0}>
-        Invest
-      </button>
-    {/if}
-  </div>
