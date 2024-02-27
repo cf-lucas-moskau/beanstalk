@@ -1,18 +1,44 @@
 <script>
     import Money from "../../../components/Money.svelte";
     import ProjectCards from "../../../components/ProjectCards.svelte";
-  
-    import {currentExperiment} from "../../../stores/current-experiment.js";
+    import { onMount, onDestroy} from 'svelte';
+    import { writable } from 'svelte/store';
+
+    import {currentExperiment, shuffledList} from "../../../stores/current-experiment.js";
+    import {pitches} from "../../../data.js";
   
     export let data;
     let finishClicked = false;
-  
+    let isFirstVal;
+    let copy = [];
+    const isFirstLoad = writable(true);
   
     if ($currentExperiment == '') {
       // @ts-ignore
       currentExperiment.changeValue(data.experiment.id);
     }
-  
+
+    if ($shuffledList.length === 0) {
+        shuffledList.shuffle(shuffle([...pitches]));
+    }
+
+    onMount(() => {
+       console.log('onMount called');
+
+    });
+
+
+    //Fisher-Yates shuffle from svelte documentation
+    function shuffle(array) {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
   </script>
   
   <div class="container">
@@ -38,7 +64,7 @@
   {/if}
   
   <div>
-      <ProjectCards pitches={data.pitches} />
+      <ProjectCards pitches={$shuffledList} />
   </div>
   </div>
   

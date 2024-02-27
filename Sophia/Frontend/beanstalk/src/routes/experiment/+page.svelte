@@ -1,49 +1,11 @@
 <script lang="ts">
-  import { onMount} from 'svelte';
-  import { writable } from 'svelte/store';
   import { experiments } from '../../data.js';
-
-  let isFirstVal;
-  let copy = [];
-  const isFirstLoad = writable(true);
-
-  onMount(() => {
-    console.log('called nMount');
-    isFirstLoad.subscribe(val => {
-      console.log('Subscribe called');
-      isFirstVal = val;
-    });
-
-    if (isFirstVal) {
-      console.log('isFirstVal');
-      let storedExperiments = localStorage.getItem('experiments');
-      if (storedExperiments) {
-        copy = JSON.parse(storedExperiments);
-      } else {
-        copy = shuffle([...experiments]);
-        localStorage.setItem('experiments', JSON.stringify(copy));
-      }
-      isFirstLoad.set(false);
-    }
-  });
-
-//Fisher-Yates shuffle from svelte documentation
-function shuffle(array) {
-  let currentIndex = array.length, randomIndex;
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-  }
-  return array;
-}
-
 </script>
 
   <div class="container">
     <h1>Experiment List</h1>
     <div class="card-container">
-      {#each copy as exp}
+      {#each experiments as exp}
         <a href={`/experiment/${exp.id}`}>
           <div class="card">
             <h2>{exp.title}</h2>
