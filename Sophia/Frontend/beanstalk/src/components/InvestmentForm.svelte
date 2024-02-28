@@ -62,7 +62,7 @@
 	</div>
     {/if}
     <p>{$investment} € left to invest</p>
-    <button class="investment-button" on:click={openModal}>Open Modal</button>
+    <button class="investment-button" disabled={amount > $investment || amount <= 0} on:click={openModal}>Open Modal</button>
 
     {#if modalOpen}
       <Modal on:closeModal={handleCloseModal} on:submit={handleInvest} />
@@ -116,24 +116,23 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-  
-    /*.investment-button:hover {*/
-    /*  background-color: #1565c0;*/
-    /*}*/
+    .investment-button:hover {
+      background-color: #1565c0;
+    }
 
-    /*.investment-button:focus {*/
-    /*  outline: none;*/
-    /*}*/
+    .investment-button:focus {
+      outline: none;
+    }
 
-    /*.investment-button:active {*/
-    /*  background-color: #0d47a1;*/
-    /*}*/
+    .investment-button:active {
+      background-color: #0d47a1;
+    }
 
-    /*.investment-button:disabled {*/
-    /*    background-color: gray;*/
-    /*    opacity: 0.5;*/
-    /*    cursor: not-allowed;*/
-    /*}*/
+    .investment-button:disabled {
+        background-color: gray;
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
     .invalid-div{
 		background-color: lightcoral;
 		border-radius: 10px;
