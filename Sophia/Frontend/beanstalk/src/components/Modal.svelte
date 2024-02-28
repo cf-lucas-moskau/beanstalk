@@ -19,7 +19,8 @@
 
 <div class="modal">
     <div class="modal-content">
-        <h2>Modal Title</h2>
+        <h2>Before you invest...</h2>
+        <p>Why do you want to invest in this pitch?</p>
         <input type="text" bind:value={inputValue} placeholder="Enter value" />
         <div class="modal-actions">
             <button on:click={closeModal}>Cancel</button>

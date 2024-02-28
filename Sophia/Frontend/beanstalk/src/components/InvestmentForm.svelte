@@ -37,7 +37,7 @@
       $investments = [...$investments, { pitchId, amount }];
       investment.reduce(_investment => _investment - amount);
       successfulInvestment = true;
-      isPopupOpen = false;
+      modalOpen = false;
     }
   </script>
   
@@ -65,7 +65,7 @@
     <button class="investment-button" on:click={openModal}>Open Modal</button>
 
     {#if modalOpen}
-      <Modal on:closeModal={handleCloseModal} on:submit={handleModalSubmit} />
+      <Modal on:closeModal={handleCloseModal} on:submit={handleInvest} />
     {/if}
 
 
