@@ -54,18 +54,14 @@
                 }}>Continue</button>
                 <button class="end-button">Finish</button>
             </p>
-            
         {/if}
     </div>
-      
-      {#if data.experiment.type == 'investment'} 
-  
-      <Money currency={'€'} />
-  {/if}
-  
-  <div>
+      {#if data.experiment.type == 'investment'}
+        <Money currency={'€'} />
+      {/if}
+    <div>
       <ProjectCards pitches={$shuffledList} />
-  </div>
+    </div>
   </div>
   
   
