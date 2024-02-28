@@ -62,7 +62,7 @@
 	</div>
     {/if}
     <p>{$investment} € left to invest</p>
-    <button on:click={openModal}>Open Modal</button>
+    <button class="investment-button" on:click={openModal}>Open Modal</button>
 
     {#if modalOpen}
       <Modal on:closeModal={handleCloseModal} on:submit={handleModalSubmit} />

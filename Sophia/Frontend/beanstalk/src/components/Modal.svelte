@@ -23,7 +23,7 @@
         <input type="text" bind:value={inputValue} placeholder="Enter value" />
         <div class="modal-actions">
             <button on:click={closeModal}>Cancel</button>
-            <button on:click={handleSubmit}>Submit</button>
+            <button disabled={inputValue===''} on:click={handleSubmit}>Submit</button>
         </div>
     </div>
 </div>
