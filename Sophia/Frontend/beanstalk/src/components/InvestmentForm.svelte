@@ -2,10 +2,12 @@
 <script lang="ts">
 
     import { investment, investments } from "../stores/investment";
+    import Modal from './Modal.svelte';
 
     let amount = 100;
     let unsufficientFunds = false;
     let successfulInvestment = false;
+    let modalOpen = false;
     let isPopupOpen = false;
     let inputValue = '';
 
@@ -13,6 +15,19 @@
     export let pitchId: string;
 
     $: amount > $investment ? unsufficientFunds = true : null;
+
+    function openModal() {
+      modalOpen = true;
+    }
+
+    function handleCloseModal() {
+      modalOpen = false;
+    }
+
+    function handleModalSubmit(value) {
+      console.log('Submitted value:', value);
+      modalOpen = false;
+    }
 
     function openPopup() {
       isPopupOpen = true;
@@ -47,13 +62,20 @@
 	</div>
     {/if}
     <p>{$investment} € left to invest</p>
-    <button class="investment-button" on:click="{openPopup}">TestInvest
-    </button>
-    {#if isPopupOpen}
-      <button class="investment-button" on:click="{handleInvest}" disabled={amount > $investment || amount <= 0}>
-        Invest
-      </button>
+    <button on:click={openModal}>Open Modal</button>
+
+    {#if modalOpen}
+      <Modal on:closeModal={handleCloseModal} on:submit={handleModalSubmit} />
     {/if}
+
+
+<!--    <button class="investment-button" on:click="{openPopup}">TestInvest-->
+<!--    </button>-->
+<!--    {#if isPopupOpen}-->
+<!--      <button class="investment-button" on:click="{handleInvest}" disabled={amount > $investment || amount <= 0}>-->
+<!--        Invest-->
+<!--      </button>-->
+<!--    {/if}-->
   </div>
 
 
