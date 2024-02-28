@@ -23,13 +23,47 @@
         <p>Why do you want to invest in this pitch?</p>
         <input type="text" bind:value={inputValue} placeholder="Enter value" />
         <div class="modal-actions">
-            <button on:click={closeModal}>Cancel</button>
-            <button disabled={inputValue===''} on:click={handleSubmit}>Submit</button>
+            <button class="investment-button" on:click={closeModal}>Cancel</button>
+            <button class="investment-button" disabled={inputValue===''} on:click={handleSubmit}>Submit</button>
         </div>
     </div>
 </div>
 
 <style>
+    .investment-button:hover {
+        background-color: #1565c0;
+    }
+
+    .investment-button:focus {
+        outline: none;
+    }
+
+    .investment-button:active {
+        background-color: #0d47a1;
+    }
+
+    .investment-button:disabled {
+        background-color: gray;
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .investment-button {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 4px;
+        background-color: #1e88e5;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
     .modal {
         position: fixed;
         top: 0;
