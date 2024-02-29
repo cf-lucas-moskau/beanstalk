@@ -1,3 +1,4 @@
+<!--  https://svelte.dev/examples/modal  -->
 <script>
     export let showModal; // boolean
 
@@ -19,7 +20,7 @@
         <slot />
         <hr />
         <!-- svelte-ignore a11y-autofocus -->
-        <button on:click={() => dialog.close()}>Cancel</button>
+        <button class="cancel-button" on:click={() => dialog.close()}>Cancel</button>
     </div>
 </dialog>
 
@@ -59,6 +60,37 @@
         }
     }
     button {
-        display: block;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 4px;
+        background-color: #1e88e5;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
     }
+    button:hover {
+        background-color: #1565c0;
+    }
+
+    button:focus {
+        outline: none;
+    }
+
+    button:active {
+        background-color: #0d47a1;
+    }
+
+    button:disabled {
+        background-color: gray;
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
 </style>

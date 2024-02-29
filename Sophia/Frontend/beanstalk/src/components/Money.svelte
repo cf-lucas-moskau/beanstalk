@@ -1,17 +1,28 @@
 <script lang="ts">
   export let currency: string = '$';
 
-  import { investment } from "../stores/investment";
+  import { investment, investments } from "../stores/investment";
+  import ModalAlternative from "./ModalAlternative.svelte";
 
+  let showModal;
   function updateInvestment() {
     investment.reduce((value) => value - 1);
   }
 
+
 </script>
 
-<div class="money-box">
+<button class="money-box" on:click={() => (showModal=true)}>
   <div class="amount">Left to invest: {currency}{$investment.toFixed(2)}</div>
-</div>
+  <ModalAlternative bind:showModal>
+    {#each $investments as i}
+      <p>{i.amount}</p>
+      <input placeholder="{i.amount}" bind:value={i.amount}>
+
+    {/each}
+
+  </ModalAlternative>
+</button>
 
 <style>
   .money-box {
@@ -29,6 +40,7 @@
       font-weight: bold;
       color: #333;
       margin-right: 10px;
+    cursor: pointer;
 }
 
   .amount {

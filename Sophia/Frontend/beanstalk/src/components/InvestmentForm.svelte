@@ -1,8 +1,7 @@
 <!-- src/components/InvestmentForm.svelte -->
 <script lang="ts">
 
-    import { investment, investments } from "../stores/investment";
-    import Modal from './Modal.svelte';
+    import { investment, investments } from "../stores/investment"
     import ModalAlternative from "./ModalAlternative.svelte";
 
     let amount = 100;
@@ -10,20 +9,13 @@
     let unsufficientFunds = false;
     let successfulInvestment = false;
     let modalOpen = false;
-    let showModal = false;
+    let showModal;
 
 
     export let pitchId: string;
 
     $: amount > $investment ? unsufficientFunds = true : null;
 
-    function openModal() {
-      modalOpen = true;
-    }
-
-    function handleCloseModal() {
-      modalOpen = false;
-    }
     function handleInvest() {
       console.log(`Investing: ${amount}` + ` in pitch` + pitchId);
       console.log('Reason from form: ' + `${reason}`);
@@ -59,6 +51,7 @@
     <button class="investment-button" disabled={amount > $investment || amount <= 0} on:click={() => (showModal = true)}>Invest</button>
 
     {#if showModal}
+    <!--FIXME: Property missing type...??-->
     <ModalAlternative bind:showModal>
       <h2 slot="header">
         modal
@@ -77,10 +70,6 @@
         <p>{e.amount} to pitch {e.pitchId} because: <br> {e.reason}</p>
       {/if}
     {/each}
-<!--    <button class="investment-button" disabled={amount > $investment || amount <= 0} on:click={openModal}>Invest</button>-->
-<!--    {#if modalOpen}-->
-<!--      <Modal bind:inputValue={reason} on:closeModal={handleCloseModal} on:submit={handleInvest} />-->
-<!--    {/if}-->
   </div>
 
 
