@@ -49,17 +49,20 @@
 		<p>Unsufficient Funds, lower investment</p>
 	</div>
     {/if}
-    {#if successfulInvestment}
+    {#if successfulInvestment && !unsufficientFunds}
     <div class="success-div">
 		<p>Success</p>
 	</div>
     {/if}
     <p>{$investment} € left to invest</p>
+    {#each $investments as e}
+      <p>{e.amount} to pitch {e.pitchId} because: <br> {e.reason}</p>
+    {/each}
     <button class="investment-button" disabled={amount > $investment || amount <= 0} on:click={openModal}>Open Modal</button>
-
     {#if modalOpen}
       <Modal bind:inputValue={reason} on:closeModal={handleCloseModal} on:submit={handleInvest} />
     {/if}
+  </div>
 
 
 <!--    <button class="investment-button" on:click="{openPopup}">TestInvest-->
@@ -69,7 +72,6 @@
 <!--        Invest-->
 <!--      </button>-->
 <!--    {/if}-->
-  </div>
 
 
   <style>
