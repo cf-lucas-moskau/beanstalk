@@ -3,14 +3,14 @@
 
     import { investment, investments } from "../stores/investment";
     import Modal from './Modal.svelte';
+    import ModalAlternative from "./ModalAlternative.svelte";
 
     let amount = 100;
     let reason = '';
     let unsufficientFunds = false;
     let successfulInvestment = false;
     let modalOpen = false;
-    let isPopupOpen = false;
-    let inputValue = '';
+    let showModal = false;
 
 
     export let pitchId: string;
@@ -30,10 +30,11 @@
       $investments = [...$investments, { pitchId, amount, reason }];
       investment.reduce(_investment => _investment - amount);
       successfulInvestment = true;
+      reason = '';
       modalOpen = false;
+      showModal = false;
     }
   </script>
-  
 
   <div class="investment-form">
     <input
@@ -46,7 +47,7 @@
     />
     {#if unsufficientFunds}
     <div class="invalid-div">
-		<p>Unsufficient Funds, lower investment</p>
+		<p>Insufficient Funds, lower investment</p>
 	</div>
     {/if}
     {#if successfulInvestment && !unsufficientFunds}
@@ -54,26 +55,33 @@
 		<p>Success</p>
 	</div>
     {/if}
+
+    <button class="investment-button" disabled={amount > $investment || amount <= 0} on:click={() => (showModal = true)}>Invest</button>
+
+    {#if showModal}
+    <ModalAlternative bind:showModal>
+      <h2 slot="header">
+        modal
+        <small><em>adjective</em> mod·al \ˈmō-dəl\</small>
+      </h2>
+      <textarea autofocus bind:value={reason} placeholder="Because this team rocks!"></textarea>
+      <div class="modal-actions">
+        <button class="investment-button" disabled={reason===''} on:click={handleInvest}>Invest</button>
+      </div>
+    </ModalAlternative>
+    {/if}
+
     <p>{$investment} € left to invest</p>
     {#each $investments as e, index}
       {#if index !== 0}
         <p>{e.amount} to pitch {e.pitchId} because: <br> {e.reason}</p>
       {/if}
     {/each}
-    <button class="investment-button" disabled={amount > $investment || amount <= 0} on:click={openModal}>Open Modal</button>
-    {#if modalOpen}
-      <Modal bind:inputValue={reason} on:closeModal={handleCloseModal} on:submit={handleInvest} />
-    {/if}
-  </div>
-
-
-<!--    <button class="investment-button" on:click="{openPopup}">TestInvest-->
-<!--    </button>-->
-<!--    {#if isPopupOpen}-->
-<!--      <button class="investment-button" on:click="{handleInvest}" disabled={amount > $investment || amount <= 0}>-->
-<!--        Invest-->
-<!--      </button>-->
+<!--    <button class="investment-button" disabled={amount > $investment || amount <= 0} on:click={openModal}>Invest</button>-->
+<!--    {#if modalOpen}-->
+<!--      <Modal bind:inputValue={reason} on:closeModal={handleCloseModal} on:submit={handleInvest} />-->
 <!--    {/if}-->
+  </div>
 
 
   <style>

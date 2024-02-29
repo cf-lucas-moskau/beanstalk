@@ -24,7 +24,7 @@
         <textarea autofocus bind:value={inputValue} placeholder="Because this team rocks!"></textarea>
         <div class="modal-actions">
             <button class="investment-button" on:click={closeModal}>Cancel</button>
-            <button class="investment-button" disabled={inputValue===''} on:click={handleSubmit}>Submit</button>
+            <button class="investment-button" disabled={inputValue===''} on:click={handleSubmit}>Invest</button>
         </div>
     </div>
 </div>

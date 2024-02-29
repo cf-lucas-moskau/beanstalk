@@ -9,9 +9,6 @@
   
     export let data;
     let finishClicked = false;
-    let isFirstVal;
-    let copy = [];
-    const isFirstLoad = writable(true);
   
     if ($currentExperiment == '') {
       // @ts-ignore
