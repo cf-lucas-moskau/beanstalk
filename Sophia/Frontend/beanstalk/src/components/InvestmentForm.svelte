@@ -55,8 +55,10 @@
 	</div>
     {/if}
     <p>{$investment} € left to invest</p>
-    {#each $investments as e}
-      <p>{e.amount} to pitch {e.pitchId} because: <br> {e.reason}</p>
+    {#each $investments as e, index}
+      {#if index !== 0}
+        <p>{e.amount} to pitch {e.pitchId} because: <br> {e.reason}</p>
+      {/if}
     {/each}
     <button class="investment-button" disabled={amount > $investment || amount <= 0} on:click={openModal}>Open Modal</button>
     {#if modalOpen}
