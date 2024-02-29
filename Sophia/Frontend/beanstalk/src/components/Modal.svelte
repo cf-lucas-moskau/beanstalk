@@ -1,7 +1,7 @@
 <script>
     import { createEventDispatcher } from 'svelte';
 
-    let inputValue = '';
+    export let inputValue = '';
 
     const dispatch = createEventDispatcher();
 
@@ -21,7 +21,6 @@
     <div class="modal-content">
         <h2>Before you invest...</h2>
         <p>Why do you want to invest in this pitch?</p>
-<!--        <input type="textarea" bind:value={inputValue} placeholder="Enter value" />-->
         <textarea autofocus bind:value={inputValue} placeholder="Because this team rocks!"></textarea>
         <div class="modal-actions">
             <button class="investment-button" on:click={closeModal}>Cancel</button>

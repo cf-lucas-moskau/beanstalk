@@ -5,6 +5,7 @@
     import Modal from './Modal.svelte';
 
     let amount = 100;
+    let reason = '';
     let unsufficientFunds = false;
     let successfulInvestment = false;
     let modalOpen = false;
@@ -23,18 +24,10 @@
     function handleCloseModal() {
       modalOpen = false;
     }
-
-    function handleModalSubmit(value) {
-      console.log('Submitted value:', value);
-      modalOpen = false;
-    }
-
-    function openPopup() {
-      isPopupOpen = true;
-    }
     function handleInvest() {
       console.log(`Investing: ${amount}` + ` in pitch` + pitchId);
-      $investments = [...$investments, { pitchId, amount }];
+      console.log('Reason from form: ' + `${reason}`);
+      $investments = [...$investments, { pitchId, amount, reason }];
       investment.reduce(_investment => _investment - amount);
       successfulInvestment = true;
       modalOpen = false;
@@ -65,7 +58,7 @@
     <button class="investment-button" disabled={amount > $investment || amount <= 0} on:click={openModal}>Open Modal</button>
 
     {#if modalOpen}
-      <Modal on:closeModal={handleCloseModal} on:submit={handleInvest} />
+      <Modal bind:inputValue={reason} on:closeModal={handleCloseModal} on:submit={handleInvest} />
     {/if}
 
 
