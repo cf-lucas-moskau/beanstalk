@@ -6,14 +6,14 @@
 
   let amount: number;
   let pitchId;
-  let reason;
+  let reason = '';
   let successfulInvestment = false; //TODO: When true show something..?
   let insufficientFunds = false;
 
   let showModal;
   function updateInvestment(index) {
     console.log('update called');
-    //$investments[index].reason = reason;
+    $investments[index].reason = reason;
     //investment.reduce((value) => value - 1);
     console.log(`Investing: ${amount}` + ` in pitch` + pitchId);
     console.log('Reason from form: ' + `${reason}`);
@@ -39,23 +39,28 @@
 <button class="money-box" on:click={() => (showModal=true)}>
   <div class="amount">Left to invest: {currency}{$investment.toFixed(2)}</div>
   <ModalAlternative bind:showModal>
+    <h1>Investment Log</h1>
+    <h2>Review and adjust your investments here!</h2>
     {#each $investments as i, index}
       {#if index > 0}
-        <p>Investment to pitch {i.pitchId}</p>
+      <div>
+        <p>{i.amount} {currency} investment to pitch {i.pitchId}</p>
         <br>
         <input
-                step = "10"
-                min = "0"
-                max = "{$investment + i.amount}"
+                step="10"
+                min="0"
+                max="{$investment + i.amount}"
                 bind:value={amount}
                 type="number"
                 placeholder="{i.amount.toString()}"
         />
         <button on:click={() => updateInvestment(index)}>Apply</button>
         <br>
-        <textarea placeholder="new amount" bind:value={i.reason}/>
+        <textarea required placeholder="Enter a reason" value={i.reason}/>
         <button on:click={() => handleDelete(index)}>Test delete</button>
+      </div>
       {/if}
+      <hr>
     {/each}
 
   </ModalAlternative>
