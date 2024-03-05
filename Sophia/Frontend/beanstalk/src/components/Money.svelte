@@ -4,14 +4,30 @@
   import { investment, investments } from "../stores/investment";
   import ModalAlternative from "./ModalAlternative.svelte";
 
+  let amount: number;
+  let pitchId;
+  let reason;
+  let successfulInvestment = false; //TODO: When true show something..?
+  let insufficientFunds = false;
+
   let showModal;
-  function updateInvestment() {
-    investment.reduce((value) => value - 1);
+  function updateInvestment(index) {
+    console.log('update called');
+    //$investments[index].reason = reason;
+    //investment.reduce((value) => value - 1);
+    console.log(`Investing: ${amount}` + ` in pitch` + pitchId);
+    console.log('Reason from form: ' + `${reason}`);
+    let dif = 10;
+    investment.reduce(_investment => _investment + dif);
+    successfulInvestment = true;
+    reason = '';
+    console.log('Update ends here');
   }
 
 
-  //FIXME: Add the money back to investment.
   function handleDelete (index) {
+    let v = $investments[index];
+    investment.reduce(_investment => _investment + v.amount);
     investments.update(investmentsArray => {
     investmentsArray.splice(index, 1);
     return investmentsArray;
@@ -24,9 +40,22 @@
   <div class="amount">Left to invest: {currency}{$investment.toFixed(2)}</div>
   <ModalAlternative bind:showModal>
     {#each $investments as i, index}
-      <p>{i.amount}</p>
-      <input placeholder="new amount" bind:value={i.reason}/>
-      <button on:click={() => handleDelete(i)}>Test delete</button>
+      {#if index > 0}
+        <p>Investment to pitch {i.pitchId}</p>
+        <br>
+        <input
+                step = "10"
+                min = "0"
+                max = "{$investment + i.amount}"
+                bind:value={amount}
+                type="number"
+                placeholder="{i.amount.toString()}"
+        />
+        <button on:click={() => updateInvestment(index)}>Apply</button>
+        <br>
+        <textarea placeholder="new amount" bind:value={i.reason}/>
+        <button on:click={() => handleDelete(index)}>Test delete</button>
+      {/if}
     {/each}
 
   </ModalAlternative>

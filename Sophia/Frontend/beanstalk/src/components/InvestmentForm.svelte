@@ -8,7 +8,6 @@
     let reason = '';
     let unsufficientFunds = false;
     let successfulInvestment = false;
-    let modalOpen = false;
     let showModal;
 
 
@@ -23,7 +22,6 @@
       investment.reduce(_investment => _investment - amount);
       successfulInvestment = true;
       reason = '';
-      modalOpen = false;
       showModal = false;
     }
   </script>
@@ -54,8 +52,7 @@
     <!--FIXME: Property missing type...??-->
     <ModalAlternative bind:showModal>
       <h2 slot="header">
-        modal
-        <small><em>adjective</em> mod·al \ˈmō-dəl\</small>
+        Why do you want to invest?
       </h2>
       <textarea autofocus bind:value={reason} placeholder="Because this team rocks!"></textarea>
       <div class="modal-actions">
