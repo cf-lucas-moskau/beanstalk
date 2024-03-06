@@ -72,6 +72,8 @@
     let dif = $investments[index].amount - arrTemp[index].amount;
     investments.update(inv => {
       inv[index].amount = arrTemp[index].amount;
+      inv[index].reason = arrTemp[index].reason;
+      //inv[index] = [...{inv[index].amount,inv[index].reason}];
       return inv;
     })
     investment.reduce(_investment => _investment + dif);

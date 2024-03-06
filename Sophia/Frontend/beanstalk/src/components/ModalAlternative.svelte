@@ -1,7 +1,7 @@
 <!--  https://svelte.dev/examples/modal  -->
 <script>
     export let showModal; // boolean
-    export let onCancel;
+    export let onCancel = () => {};
     export let dialog; // HTMLDialogElement
 
     $: if (dialog && showModal) dialog.showModal();
