@@ -13,7 +13,7 @@
 
   let successfulInvestment = false; //TODO: When true show something..?
   let insufficientFunds: boolean;
-  $: insufficientFunds = (investTemp < 0);
+  $: insufficientFunds = (investTemp <= 0 && $investment === 0);
 
   //TODO: No longer need the index besides test logs
   function localUpdate (index) {
@@ -21,9 +21,9 @@
     for (let i=1; i<$investments.length; i++) {
       investTemp += $investments[i].amount - arrTemp[i].amount;
     }
-    console.log("Invest temp: " + investTemp);
-    console.log("arr temp: " + arrTemp[index].amount);
-    console.log("store: " + $investments[index].amount);
+    // console.log("Invest temp: " + investTemp);
+    // console.log("arr temp: " + arrTemp[index].amount);
+    // console.log("store: " + $investments[index].amount);
   }
 
   let showModal;
