@@ -1,9 +1,12 @@
 <script lang="ts">
+  import {onMount} from "svelte";
+
   export let currency: string = '$';
 
   import { investment, investments } from "../stores/investment";
   import ModalAlternative from "./ModalAlternative.svelte";
 
+  let arrTemp = [];
 
 
   let amount: number;
@@ -13,6 +16,18 @@
   let insufficientFunds = false;
 
   let showModal;
+
+  onMount(() => {
+    console.log('Money: on mount called\n');
+    $investments.forEach((item, index) => {
+      arrTemp.push({ pitchId: item.pitchId, amount: item.amount, reason: item.reason });
+    });
+    //1st entry is test.
+    for (let i=0; i<arrTemp.length; i++) {
+      console.log(arrTemp[i]);
+    }
+    console.log('Money: end of on mount.');
+  });
   function updateInvestment(index) {
     console.log('update called');
     $investments[index].reason = reason;
