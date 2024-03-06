@@ -14,9 +14,11 @@
   let successfulInvestment = false; //TODO: When true show something..?
   let insufficientFunds: boolean;
   $: insufficientFunds = (investTemp <= 0);
-  function localUpdate (e) {
-    const num = Number(e.target.value);
-    //TODO: Some sort of update!!
+  function localUpdate (index) {
+    investTemp = $investment - arrTemp[index].amount + $investments[index].amount;
+    console.log("Invest temp: " + investTemp);
+    console.log("arr temp: " + arrTemp[index].amount);
+    console.log("store: " + $investments[index].amount);
 
   }
 
@@ -92,7 +94,7 @@
                 bind:value={i.amount}
                 type="number"
                 placeholder="{i.amount.toString()}"
-                on:input={localUpdate}
+                on:input={() => localUpdate(index)}
         />
         <button disabled={insufficientFunds} on:click={() => updateInvestment(index)}>Apply</button>
         <br>
