@@ -4,6 +4,8 @@
   import { investment, investments } from "../stores/investment";
   import ModalAlternative from "./ModalAlternative.svelte";
 
+
+
   let amount: number;
   let pitchId;
   let reason = '';
@@ -17,6 +19,7 @@
     //investment.reduce((value) => value - 1);
     console.log(`Investing: ${amount}` + ` in pitch` + pitchId);
     console.log('Reason from form: ' + `${reason}`);
+    //FIXME: Get actual result back to investment!
     let dif = 10;
     investment.reduce(_investment => _investment + dif);
     successfulInvestment = true;
@@ -60,7 +63,6 @@
         <button on:click={() => handleDelete(index)}>Test delete</button>
       </div>
       {/if}
-      <hr>
     {/each}
 
   </ModalAlternative>
