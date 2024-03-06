@@ -6,22 +6,27 @@
   import { investment, investments } from "../stores/investment";
   import ModalAlternative from "./ModalAlternative.svelte";
 
+  //Temporary variables to keep track of edits before submit.
   let arrTemp = [];
+  let investTemp;
 
-
-  let amount: number;
-  let pitchId;
-  let reason = '';
   let successfulInvestment = false; //TODO: When true show something..?
   let insufficientFunds = false;
 
   let showModal;
 
-  onMount(() => {
-    console.log('Money: on mount called\n');
+  //Function to set the array to the version in stores.
+  function reset2Investments () {
+    arrTemp = [];
+    investTemp = $investment;
     $investments.forEach((item, index) => {
       arrTemp.push({ pitchId: item.pitchId, amount: item.amount, reason: item.reason });
     });
+  }
+
+  onMount(() => {
+    console.log('Money: on mount called\n');
+    reset2Investments();
     //1st entry is test.
     for (let i=0; i<arrTemp.length; i++) {
       console.log(arrTemp[i]);
@@ -30,26 +35,26 @@
   });
   function updateInvestment(index) {
     console.log('update called');
-    $investments[index].reason = reason;
-    //investment.reduce((value) => value - 1);
-    console.log(`Investing: ${amount}` + ` in pitch` + pitchId);
-    console.log('Reason from form: ' + `${reason}`);
+
     //FIXME: Get actual result back to investment!
     let dif = 10;
     investment.reduce(_investment => _investment + dif);
     successfulInvestment = true;
-    reason = '';
     console.log('Update ends here');
   }
 
 
   function handleDelete (index) {
-    let v = $investments[index];
+    let v = arrTemp[index];
+
     investment.reduce(_investment => _investment + v.amount);
     investments.update(investmentsArray => {
-    investmentsArray.splice(index, 1);
-    return investmentsArray;
-  });
+      investmentsArray.splice(index, 1);
+      //TODO: Would be more efficient but indexes get messed up for some reason.
+      //arrTemp.splice(index,1);
+      reset2Investments();
+      return investmentsArray;
+    });
   }
 
 </script>
@@ -59,7 +64,7 @@
   <ModalAlternative bind:showModal>
     <h1>Investment Log</h1>
     <h2>Review and adjust your investments here!</h2>
-    {#each $investments as i, index}
+    {#each arrTemp as i, index}
       {#if index > 0}
       <div>
         <p>{i.amount} {currency} investment to pitch {i.pitchId}</p>
@@ -67,8 +72,8 @@
         <input
                 step="10"
                 min="0"
-                max="{$investment + i.amount}"
-                bind:value={amount}
+                max={$investment + i.amount}
+                bind:value={i.amount}
                 type="number"
                 placeholder="{i.amount.toString()}"
         />
