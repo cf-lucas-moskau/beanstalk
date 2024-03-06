@@ -96,9 +96,9 @@
                 placeholder="{i.amount.toString()}"
                 on:input={() => localUpdate(index)}
         />
-        <button disabled={insufficientFunds} on:click={() => updateInvestment(index)}>Apply</button>
+        <textarea required placeholder="Enter a reason" bind:value={i.reason}/>
+        <button disabled={insufficientFunds || !i.reason} on:click={() => updateInvestment(index)}>Apply</button>
         <br>
-        <textarea required placeholder="Enter a reason" value={i.reason}/>
         <button on:click={() => handleDelete(index)}>Test delete</button>
       </div>
         {:else }
