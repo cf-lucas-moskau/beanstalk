@@ -13,16 +13,24 @@
 
   let successfulInvestment = false; //TODO: When true show something..?
   let insufficientFunds: boolean;
-  $: insufficientFunds = (investTemp <= 0);
+  $: insufficientFunds = (investTemp < 0);
+
+  //TODO: No longer need the index besides test logs
   function localUpdate (index) {
-    investTemp = $investment - arrTemp[index].amount + $investments[index].amount;
+    investTemp = $investment;
+    for (let i=1; i<$investments.length; i++) {
+      investTemp += $investments[i].amount - arrTemp[i].amount;
+    }
     console.log("Invest temp: " + investTemp);
     console.log("arr temp: " + arrTemp[index].amount);
     console.log("store: " + $investments[index].amount);
-
   }
 
   let showModal;
+
+  function handleCancel () {
+    reset2Investments();
+  }
 
   onMount(() => {
     console.log('Money: on mount called\n');
@@ -78,7 +86,7 @@
 
 <button class="money-box" on:click={() => (showModal=true)}>
   <div class="amount">Left to invest: {currency}{$investment.toFixed(2)}</div>
-  <ModalAlternative bind:showModal>
+  <ModalAlternative bind:showModal onCancel={handleCancel}>
     <h1 slot="header">Investment Log</h1>
     <h2>Review and adjust your investments here!</h2>
     {#each arrTemp as i, index}

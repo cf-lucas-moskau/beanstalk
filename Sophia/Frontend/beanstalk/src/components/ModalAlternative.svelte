@@ -1,7 +1,7 @@
 <!--  https://svelte.dev/examples/modal  -->
 <script>
     export let showModal; // boolean
-
+    export let onCancel;
     export let dialog; // HTMLDialogElement
 
     $: if (dialog && showModal) dialog.showModal();
@@ -20,7 +20,9 @@
         <slot />
 <!--        <hr />-->
         <!-- svelte-ignore a11y-autofocus -->
-        <button class="cancel-button" on:click={() => dialog.close()}>Cancel</button>
+        <button class="cancel-button" on:click={() => {
+            dialog.close();
+            onCancel();}}>Cancel</button>
     </div>
 </dialog>
 
