@@ -15,15 +15,6 @@
 
   let showModal;
 
-  //Function to set the array to the version in stores.
-  function reset2Investments () {
-    arrTemp = [];
-    investTemp = $investment;
-    $investments.forEach((item, index) => {
-      arrTemp.push({ pitchId: item.pitchId, amount: item.amount, reason: item.reason });
-    });
-  }
-
   onMount(() => {
     console.log('Money: on mount called\n');
     reset2Investments();
@@ -33,19 +24,18 @@
     }
     console.log('Money: end of on mount.');
   });
-  function updateInvestment(index) {
-    console.log('update called');
 
-    //FIXME: Get actual result back to investment!
-    let dif = 10;
-    investment.reduce(_investment => _investment + dif);
-    successfulInvestment = true;
-    console.log('Update ends here');
+  //Function to set the array to the version in stores.
+  function reset2Investments () {
+    arrTemp = [];
+    investTemp = $investment;
+    $investments.forEach((item, index) => {
+      arrTemp.push({ pitchId: item.pitchId, amount: item.amount, reason: item.reason });
+    });
   }
 
-
   function handleDelete (index) {
-    let v = arrTemp[index];
+    let v = $investments[index];
 
     investment.reduce(_investment => _investment + v.amount);
     investments.update(investmentsArray => {
@@ -55,6 +45,24 @@
       reset2Investments();
       return investmentsArray;
     });
+  }
+  function updateInvestment(index) {
+    console.log('update called');
+    if (arrTemp[index].amount === 0) {
+      return (handleDelete(index));
+    }
+    //FIXME: Get actual result back to investment!
+    let dif = $investments[index].amount - arrTemp[index].amount;
+    //TODO: Update store as well
+    investments.update(inv => {
+      inv[index].amount = arrTemp[index].amount;
+      return inv;
+    })
+    investment.reduce(_investment => _investment + dif);
+    successfulInvestment = true;
+    console.log("store val: " + $investments[index].amount );
+    console.log("temp local val: " + arrTemp[index].amount );
+    console.log('Update ends here');
   }
 
 </script>
