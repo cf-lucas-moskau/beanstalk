@@ -9,9 +9,16 @@
   //Temporary variables to keep track of edits before submit.
   let arrTemp = [];
   let investTemp;
+  $: investTemp;
 
   let successfulInvestment = false; //TODO: When true show something..?
-  let insufficientFunds = false;
+  let insufficientFunds: boolean;
+  $: insufficientFunds = (investTemp <= 0);
+  function localUpdate (e) {
+    const num = Number(e.target.value);
+    //TODO: Some sort of update!!
+
+  }
 
   let showModal;
 
@@ -24,6 +31,7 @@
     }
     console.log('Money: end of on mount.');
   });
+
 
   //Function to set the array to the version in stores.
   function reset2Investments () {
@@ -51,14 +59,13 @@
     if (arrTemp[index].amount === 0) {
       return (handleDelete(index));
     }
-    //FIXME: Get actual result back to investment!
     let dif = $investments[index].amount - arrTemp[index].amount;
-    //TODO: Update store as well
     investments.update(inv => {
       inv[index].amount = arrTemp[index].amount;
       return inv;
     })
     investment.reduce(_investment => _investment + dif);
+    investTemp = $investment;
     successfulInvestment = true;
     console.log("store val: " + $investments[index].amount );
     console.log("temp local val: " + arrTemp[index].amount );
@@ -80,17 +87,23 @@
         <input
                 step="10"
                 min="0"
-                max={$investment + i.amount}
+                max={$investment + $investments[index].amount}
                 bind:value={i.amount}
                 type="number"
                 placeholder="{i.amount.toString()}"
+                on:input={localUpdate}
         />
-        <button on:click={() => updateInvestment(index)}>Apply</button>
+        <button disabled={insufficientFunds} on:click={() => updateInvestment(index)}>Apply</button>
         <br>
         <textarea required placeholder="Enter a reason" value={i.reason}/>
         <button on:click={() => handleDelete(index)}>Test delete</button>
       </div>
+        {:else }
+        <div>
+          <p>You have no current investments.</p>
+        </div>
       {/if}
+
     {/each}
 
   </ModalAlternative>
