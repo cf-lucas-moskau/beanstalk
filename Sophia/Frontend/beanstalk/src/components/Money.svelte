@@ -77,11 +77,12 @@
 <button class="money-box" on:click={() => (showModal=true)}>
   <div class="amount">Left to invest: {currency}{$investment.toFixed(2)}</div>
   <ModalAlternative bind:showModal>
-    <h1>Investment Log</h1>
+    <h1 slot="header">Investment Log</h1>
     <h2>Review and adjust your investments here!</h2>
     {#each arrTemp as i, index}
       {#if index > 0}
       <div>
+        {#if index >1}<hr />{/if}
         <p>{i.amount} {currency} investment to pitch {i.pitchId}</p>
         <br>
         <input
