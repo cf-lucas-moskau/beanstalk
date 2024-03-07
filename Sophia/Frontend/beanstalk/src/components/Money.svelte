@@ -93,10 +93,9 @@
     <h2>Review and adjust your investments here!</h2>
     {#each arrTemp as i, index}
       {#if index > 0}
-      <div>
-        {#if index >1}<hr />{/if}
-        <p>{i.amount} {currency} investment to pitch {i.pitchId}</p>
-        <br>
+      <div class="{index % 2 ? 'odd' : 'even'}">
+        <!--{#if index >1}<hr />{/if}-->
+        <p>{$investments[index].amount} {currency} investment to pitch {i.pitchId}</p>
         <input
                 step="10"
                 min="0"
@@ -107,11 +106,14 @@
                 on:input={() => localUpdate(index)}
         />
         <textarea required placeholder="Enter a reason" bind:value={i.reason}/>
-        <button disabled={insufficientFunds || !i.reason || i.amount === $investments[index].amount} on:click={() => updateInvestment(index)}>Apply</button>
+        <button
+                disabled={insufficientFunds || !i.reason || (i.amount === $investments[index].amount && i.reason === $investments[index].reason)}
+                on:click={() => updateInvestment(index)}>
+          Apply</button>
         <br>
         <button on:click={() => handleDelete(index)}>Test delete</button>
       </div>
-        {:else }
+        {:else if (arrTemp.length === 1 &&  i.pitchId === 'Test') || arrTemp.length === 0}
         <div>
           <p>You have no current investments.</p>
         </div>
@@ -143,5 +145,9 @@
 
   .amount {
     margin: auto;
+  }
+
+  .even {
+    background-color: #f2f2f2;
   }
 </style>
