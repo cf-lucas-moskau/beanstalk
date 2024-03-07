@@ -95,32 +95,40 @@
       {#if index > 0}
       <div class="{index % 2 ? 'odd' : 'even'}">
         <!--{#if index >1}<hr />{/if}-->
-        <p>{$investments[index].amount} {currency} investment to pitch {i.pitchId}</p>
-        <input
-                step="10"
-                min="0"
-                max={$investment + $investments[index].amount}
-                bind:value={i.amount}
-                type="number"
-                placeholder="{i.amount.toString()}"
-                on:input={() => localUpdate(index)}
-        />
-        <textarea required placeholder="Enter a reason" bind:value={i.reason}/>
-        <button
-                disabled={insufficientFunds || !i.reason || (i.amount === $investments[index].amount && i.reason === $investments[index].reason)}
-                on:click={() => updateInvestment(index)}>
-          Apply</button>
-        <br>
-        <button on:click={() => handleDelete(index)}>Test delete</button>
+          <p>{$investments[index].amount} {currency} investment to pitch {i.pitchId}</p>
+          <br>
+        <div class="investment-item">
+          <textarea required placeholder="Enter a reason" bind:value={i.reason}/>
+          <input
+                  step="10"
+                  min="0"
+                  max={$investment + $investments[index].amount}
+                  bind:value={i.amount}
+                  type="number"
+                  placeholder="{i.amount.toString()}"
+                  on:input={() => localUpdate(index)}
+          />
+          <button on:click={() => handleDelete(index)}>Test delete</button>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <br>
+          <button
+                  disabled={insufficientFunds || !i.reason || (i.amount === $investments[index].amount && i.reason === $investments[index].reason)}
+                  on:click={() => updateInvestment(index)}>
+            Apply
+          </button>
+          <br>
+
+        </div>
       </div>
+
         {:else if (arrTemp.length === 1 &&  i.pitchId === 'Test') || arrTemp.length === 0}
         <div>
           <p>You have no current investments.</p>
         </div>
       {/if}
-
     {/each}
-
+    <br>
   </ModalAlternative>
 </button>
 
@@ -145,6 +153,11 @@
 
   .amount {
     margin: auto;
+  }
+
+  .investment-item {
+    display: flex;
+    align-items: flex-start;
   }
 
   .even {
