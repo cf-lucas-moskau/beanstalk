@@ -93,13 +93,14 @@
     <h2>Review and adjust your investments here!</h2>
     {#each arrTemp as i, index}
       {#if index > 0}
-      <div class="{index % 2 ? 'odd' : 'even'}">
+      <div class="investment-item">
         <!--{#if index >1}<hr />{/if}-->
           <p>{$investments[index].amount} {currency} investment to pitch {i.pitchId}</p>
           <br>
-        <div class="investment-item">
-          <textarea required placeholder="Enter a reason" bind:value={i.reason}/>
+        <div class="investment-row1">
+          <textarea required class="input" placeholder="Enter a reason" bind:value={i.reason}/>
           <input
+                  class="input textarea"
                   step="10"
                   min="0"
                   max={$investment + $investments[index].amount}
@@ -108,17 +109,15 @@
                   placeholder="{i.amount.toString()}"
                   on:input={() => localUpdate(index)}
           />
-          <button on:click={() => handleDelete(index)}>Test delete</button>
+          <button class="red-button" on:click={() => handleDelete(index)}><i class="fas fa-trash-alt"></i></button>
         </div>
         <div style="display: flex; flex-direction: column; align-items: center;">
-          <br>
-          <button
-                  disabled={insufficientFunds || !i.reason || (i.amount === $investments[index].amount && i.reason === $investments[index].reason)}
-                  on:click={() => updateInvestment(index)}>
-            Apply
-          </button>
-          <br>
-
+        <button
+                disabled={insufficientFunds || !i.reason || (i.amount === $investments[index].amount && i.reason === $investments[index].reason)}
+                on:click={() => updateInvestment(index)}>
+          Apply
+        </button>
+        <br>
         </div>
       </div>
 
@@ -133,6 +132,45 @@
 </button>
 
 <style>
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
+  .input {
+    padding: 8px;
+    font-size: 16px;
+    border: 2px solid #1e88e5;
+    border-radius: 4px;
+    margin-bottom: 5px;
+  }
+  .red-button {
+    margin-left: 15px;
+    margin-top: -5px;
+    color: white;
+    background-color: red;
+    border: none;
+    padding: 8px;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+  button {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  button:disabled {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: grey;
+    color: #fff;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+  }
   .money-box {
       display: flex;
       position: absolute;
@@ -155,12 +193,12 @@
     margin: auto;
   }
 
-  .investment-item {
+  .investment-row1 {
     display: flex;
     align-items: flex-start;
   }
 
-  .even {
+  .investment-item {
     background-color: #f2f2f2;
   }
 </style>
