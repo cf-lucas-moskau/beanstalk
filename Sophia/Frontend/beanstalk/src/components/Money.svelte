@@ -165,11 +165,12 @@
     font-size: 16px;
     padding: 10px 20px;
     border-radius: 4px;
-    background-color: grey;
+    background-color: gray;
+    opacity: 0.5;
     color: #fff;
     border: none;
     margin-top: 20px;
-    cursor: pointer;
+    cursor: not-allowed;
   }
   .money-box {
       display: flex;

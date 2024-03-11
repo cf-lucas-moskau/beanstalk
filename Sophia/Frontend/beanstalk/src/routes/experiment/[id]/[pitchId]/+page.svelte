@@ -59,6 +59,7 @@
         <h1>{pitch.name}</h1>
         <p>{pitch.teamDescription}</p>
         <button on:click={() => goto('/experiment/' + $currentExperiment)}>&larr; Back to Pitches</button>
+        <br/>
         {#if investment}
         <InvestmentForm pitchId={data.pitch.id}/>
         {/if}

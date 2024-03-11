@@ -38,10 +38,12 @@ import {investments} from "../stores/investment";
 <!--    <button on:click={() => {-->
 <!--        consentForData.set(!$consentForData);-->
 <!--    }}>{$consentForData}</button>-->
-
-    <p>Current Experiment: {$currentExperiment} {#each $investments as investment, i}
-        <p>{investment.pitchId} {investment.amount}</p>
-    {/each}</p>
     
+<!--    <p>Current Experiment: {$currentExperiment}-->
+<!--      {#each $investments as investment, i}-->
+<!--        <p>{investment.pitchId} {investment.amount}</p>-->
+<!--      {/each}-->
+<!--    </p>-->
+<!--    -->
   </footer>
   
