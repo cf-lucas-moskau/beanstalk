@@ -1,7 +1,8 @@
 <script lang="ts">
-  import {onDestroy, onMount} from 'svelte';
+    import {onDestroy, onMount} from 'svelte';
     import { goto } from '$app/navigation';
-    import { pageTracking, trackPageTime} from "../../../../stores/time-tracker";
+
+    import { trackerParams ,pageTracking, trackPageTime} from "../../../../stores/time-tracker";
     import { currentExperiment } from '../../../../stores/current-experiment.js';
     import { experiments } from '../../../../data.js';
     import InvestmentForm from '../../../../components/InvestmentForm.svelte';
@@ -11,7 +12,7 @@
     let pitch: any = null;
     let investment = false;
 
-    const route = 'testHereRoute';
+    let route = 'testHereRoute';
     let startTime;
 
     onMount(async () => {
@@ -20,8 +21,10 @@
         goto('/404');
       }
 
+      startTime, route = trackerParams;
+
       console.log('Test page tracking begin:\n');
-      console.log($pageTracking);
+      console.log(startTime, route);
       console.log('\nTest page tracking end.');
       startTime = new Date();
     });
