@@ -35,7 +35,8 @@
       placeholder="Enter investment amount"
       bind:value="{amount}"
     />
-    {#if unsufficientFunds}
+    <!-- Fixed: now insufficient amount is checked every time the input is changed -->
+    {#if amount > $investment}
     <div class="invalid-div">
 		<p>Insufficient Funds, lower investment</p>
 	</div>
@@ -45,11 +46,11 @@
 		<p>Success</p>
 	</div>
     {/if}
+    <br/>
 
     <button class="investment-button" disabled={amount > $investment || amount <= 0} on:click={() => (showModal = true)}>Invest</button>
 
     {#if showModal}
-    <!--FIXME: Property missing type...??-->
     <ModalAlternative bind:showModal>
       <h2 slot="header">
         Why do you want to invest?

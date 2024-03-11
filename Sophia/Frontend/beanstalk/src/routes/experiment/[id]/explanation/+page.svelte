@@ -44,5 +44,29 @@
 	  </button>
 </div>
 
+<style>
+	.styled-button {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		padding: 12px 24px;
+		border: none;
+		border-radius: 4px;
+		background-color: #1e88e5;
+		color: #ffffff;
+		font-size: 16px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+	}
+	.styled-button:hover {
+		background-color: #1565c0;
+	}
 
+	.styled-button:focus {
+		outline: none;
+	}
+</style>
 

@@ -62,6 +62,7 @@
         }
     }
     button {
+        margin-top: 10px;
         display: inline-flex;
         justify-content: center;
         align-items: center;
@@ -93,6 +94,9 @@
         background-color: gray;
         opacity: 0.5;
         cursor: not-allowed;
+    }
+    dialog {
+        text-align: center;
     }
 
 </style>
