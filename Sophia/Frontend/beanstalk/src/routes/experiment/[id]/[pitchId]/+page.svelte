@@ -1,21 +1,37 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+  import {onDestroy, onMount} from 'svelte';
     import { goto } from '$app/navigation';
+    import { pageTracking, trackPageTime} from "../../../../stores/time-tracker";
     import { currentExperiment } from '../../../../stores/current-experiment.js';
-  import { experiments } from '../../../../data.js';
-  import InvestmentForm from '../../../../components/InvestmentForm.svelte';
+    import { experiments } from '../../../../data.js';
+    import InvestmentForm from '../../../../components/InvestmentForm.svelte';
     
     export let data;
     
     let pitch: any = null;
     let investment = false;
-    
+
+    const route = 'testHereRoute';
+    let startTime;
+
     onMount(async () => {
       pitch = data.pitch
       if (!pitch) {
         goto('/404');
       }
+
+      console.log('Test page tracking begin:\n');
+      console.log($pageTracking);
+      console.log('\nTest page tracking end.');
+      startTime = new Date();
     });
+
+    onDestroy(() => {
+      const endTime = new Date();
+      const timeSpent = endTime - startTime;
+      trackPageTime(route, timeSpent);
+    });
+
     if ($currentExperiment !== '') {
       console.log('current exp is: ' + $currentExperiment);
       // @ts-ignore
