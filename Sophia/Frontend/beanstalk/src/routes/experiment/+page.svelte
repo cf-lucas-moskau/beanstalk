@@ -1,5 +1,22 @@
 <script lang="ts">
   import { experiments } from '../../data.js';
+  import {onDestroy, onMount} from "svelte";
+  import {trackPageTime} from "../../stores/time-tracker";
+  let startTime;
+  let route;
+
+  onMount(() => {
+    console.log('onMount called');
+
+    startTime = new Date();
+    route = window.location.href;
+  });
+  onDestroy(() => {
+    const endTime = new Date();
+    const timeSpent = endTime - startTime;
+    trackPageTime(route, timeSpent);
+  });
+
 </script>
 
   <div class="container">

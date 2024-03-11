@@ -1,11 +1,7 @@
 // stores.js
 import {get, writable} from 'svelte/store';
 
-function getParams () {
-    const url = window.location.href;
-    const startTime = new Date();
-    return {url, startTime}
-}
+
 export const pageTracking = writable([]);
 
 export function trackPageTime(route, timeSpent) {
@@ -22,6 +18,3 @@ export function trackPageTime(route, timeSpent) {
         return pages;
     });
 }
-
-//To simplify and shorten the call from each component.
-export const trackerParams = getParams();

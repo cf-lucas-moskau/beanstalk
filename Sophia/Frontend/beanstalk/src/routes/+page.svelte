@@ -2,31 +2,42 @@
 	import { consentForStudy, consentForData } from "../stores/current-experiment";
 	import { page } from '$app/stores';
 	import {goto} from '$app/navigation';
-  import {experiments} from '../data.js';
-  import {onMount} from 'svelte';
+  	import {experiments} from '../data.js';
+	import {onDestroy, onMount} from 'svelte';
+	import {trackPageTime} from "../stores/time-tracker.js";
 
 	let invalidLink = false;
-  let experiment;
-  let eId;
-  let eTitle;
-  let eType;
-  let eDescription;
-  let ePitches;
+	let experiment;
+	let eId;
+	let eTitle;
+	let eType;
+	let eDescription;
+	let ePitches;
 
-  onMount (() => {
+	let startTime;
+	let route;
 
-    const urlParams = new URLSearchParams(window.location.search);
-    eId = urlParams.get('experiment');
-    experiment = experiments.find(exp => exp.id === eId);
-    console.log(eId);
-    console.log(experiment?.title);
-    //console.log(experiment);
-    eTitle = experiment?.title;
-    eType = experiment?.type;
-    eDescription = experiment?.description;
-    ePitches = experiment?.pitches;
+  	onMount (() => {
+		const urlParams = new URLSearchParams(window.location.search);
+		eId = urlParams.get('experiment');
+		experiment = experiments.find(exp => exp.id === eId);
+		console.log(eId);
+		console.log(experiment?.title);
+		//console.log(experiment);
+		eTitle = experiment?.title;
+		eType = experiment?.type;
+		eDescription = experiment?.description;
+		ePitches = experiment?.pitches;
 
-  });
+		startTime = new Date();
+		route = window.location.href;
+  	});
+
+  	onDestroy(() => {
+		const endTime = new Date();
+		const timeSpent = endTime - startTime;
+		trackPageTime(route, timeSpent);
+  	});
 
 </script>
 

@@ -2,7 +2,7 @@
     import {onDestroy, onMount} from 'svelte';
     import { goto } from '$app/navigation';
 
-    import { trackerParams ,pageTracking, trackPageTime} from "../../../../stores/time-tracker";
+    import { pageTracking, trackPageTime} from "../../../../stores/time-tracker";
     import { currentExperiment } from '../../../../stores/current-experiment.js';
     import { experiments } from '../../../../data.js';
     import InvestmentForm from '../../../../components/InvestmentForm.svelte';
@@ -21,10 +21,12 @@
         goto('/404');
       }
 
-      startTime, route = trackerParams;
+      startTime = new Date();
+      route = window.location.href;
 
       console.log('Test page tracking begin:\n');
-      console.log(startTime, route);
+      console.log($pageTracking);
+      //console.log($pageTracking[0].length);
       console.log('\nTest page tracking end.');
       startTime = new Date();
     });

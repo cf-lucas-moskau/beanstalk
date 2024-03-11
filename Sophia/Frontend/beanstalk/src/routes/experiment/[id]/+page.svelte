@@ -2,14 +2,16 @@
     import Money from "../../../components/Money.svelte";
     import ProjectCards from "../../../components/ProjectCards.svelte";
     import { onMount, onDestroy} from 'svelte';
-    import { writable } from 'svelte/store';
-
     import {currentExperiment, shuffledList} from "../../../stores/current-experiment.js";
     import {pitches} from "../../../data.js";
+    import {trackPageTime} from "../../../stores/time-tracker.js";
   
     export let data;
     let finishClicked = false;
-  
+
+    let startTime;
+    let route;
+
     if ($currentExperiment == '') {
       // @ts-ignore
       currentExperiment.changeValue(data.experiment.id);
@@ -22,6 +24,14 @@
     onMount(() => {
        console.log('onMount called');
 
+        startTime = new Date();
+        route = window.location.href;
+    });
+
+    onDestroy(() => {
+        const endTime = new Date();
+        const timeSpent = endTime - startTime;
+        trackPageTime(route, timeSpent);
     });
 
 

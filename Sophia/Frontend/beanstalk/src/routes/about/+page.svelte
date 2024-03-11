@@ -1,3 +1,24 @@
+<script>
+	import {onMount, onDestroy} from "svelte";
+	import {trackPageTime} from "../../stores/time-tracker.js";
+
+	let startTime;
+	let route;
+
+	onMount(() => {
+		console.log('onMount called');
+
+		startTime = new Date();
+		route = window.location.href;
+	});
+
+	onDestroy(() => {
+		const endTime = new Date();
+		const timeSpent = endTime - startTime;
+		trackPageTime(route, timeSpent);
+	});
+</script>
+
 <svelte:head>
 	<title>About</title>
 	<meta name="description" content="About Beanstalk Accelerator" />
