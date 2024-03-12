@@ -180,6 +180,7 @@
       text-align: center;
       width: 100px;
       height: 90px;
+      border: #0d47a1;
       border-radius: 4px;
       background-color: #fff;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -201,5 +202,12 @@
 
   .investment-item {
     background-color: #f2f2f2;
+  }
+
+  .money-box:hover {
+    background: 10%;
+    background-color: orange;
+    color: white;
+    transition: 0.25s;
   }
 </style>
