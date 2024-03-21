@@ -11,7 +11,7 @@ function createInvestment() {
 }
 
 function createInvestments() {
-	const { subscribe, update, set } = writable([{pitchId: "Test", amount: 500}]);
+	const { subscribe, update, set } = writable([{pitchId: "Test", amount: 500, reason: 'Test reason'}]);
 
 	return {
 		subscribe,

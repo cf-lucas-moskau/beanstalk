@@ -1,5 +1,14 @@
 import { writable } from 'svelte/store';
 
+function createShuffle() {
+	const { subscribe, set} = writable([]);
+
+	return {
+		subscribe: subscribe,
+		shuffle: set,
+	};
+}
+
 function createCurrentExperiment() {
 	const { subscribe, set, update } = writable("")
 
@@ -51,3 +60,5 @@ function truncateText(text, words) {
 export const currentExperiment = createCurrentExperiment();
 export const consentForStudy = createConsentForStudy();
 export const consentForData = createConsentForData();
+
+export const shuffledList = createShuffle();

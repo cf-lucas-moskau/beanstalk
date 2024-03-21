@@ -1,22 +1,48 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+    import {onDestroy, onMount} from 'svelte';
     import { goto } from '$app/navigation';
+
+    import { pageTracking, trackPage} from "../../../../stores/page-tracker";
     import { currentExperiment } from '../../../../stores/current-experiment.js';
-  import { experiments } from '../../../../data.js';
-  import InvestmentForm from '../../../../components/InvestmentForm.svelte';
+    import { experiments } from '../../../../data.js';
+    import InvestmentForm from '../../../../components/InvestmentForm.svelte';
     
     export let data;
     
     let pitch: any = null;
     let investment = false;
-    
+
+    let route = 'testHereRoute';
+    let startTime;
+    let clicks;
+
     onMount(async () => {
       pitch = data.pitch
       if (!pitch) {
         goto('/404');
       }
+
+      startTime = new Date();
+      route = window.location.href;
+
+      console.log('Test page tracking begin:\n');
+      console.log($pageTracking);
+      console.log('\nTest page tracking end.');
+      startTime = new Date();
+      clicks = 0;
+      document.addEventListener('click', () => (clicks++));
     });
+
+    onDestroy(() => {
+      const endTime = new Date();
+      const timeSpent = endTime - startTime;
+      trackPage(route, timeSpent, clicks);
+      console.log("clicks here post destroy:");
+      console.log($pageTracking);
+    });
+
     if ($currentExperiment !== '') {
+      console.log('current exp is: ' + $currentExperiment);
       // @ts-ignore
       investment = experiments.find((e) => e.id === $currentExperiment).type === 'investment';
     }
@@ -37,6 +63,7 @@
         <h1>{pitch.name}</h1>
         <p>{pitch.teamDescription}</p>
         <button on:click={() => goto('/experiment/' + $currentExperiment)}>&larr; Back to Pitches</button>
+        <br/>
         {#if investment}
         <InvestmentForm pitchId={data.pitch.id}/>
         {/if}
@@ -119,5 +146,6 @@
     button:hover {
       background-color: #2980b9;
     }
+
   </style>
   

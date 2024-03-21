@@ -2,31 +2,45 @@
 	import { consentForStudy, consentForData } from "../stores/current-experiment";
 	import { page } from '$app/stores';
 	import {goto} from '$app/navigation';
-  import {experiments} from '../data.js';
-  import {onMount} from 'svelte';
+  	import {experiments} from '../data.js';
+	import {onDestroy, onMount} from 'svelte';
+	import { trackPage } from "../stores/page-tracker.js";
 
 	let invalidLink = false;
-  let experiment;
-  let eId;
-  let eTitle;
-  let eType;
-  let eDescription;
-  let ePitches;
+	let experiment;
+	let eId;
+	let eTitle;
+	let eType;
+	let eDescription;
+	let ePitches;
 
-  onMount (() => {
+	let startTime;
+	let route;
+	let clicks;
 
-    const urlParams = new URLSearchParams(window.location.search);
-    eId = urlParams.get('experiment');
-    experiment = experiments.find(exp => exp.id === eId);
-    console.log(eId);
-    console.log(experiment?.title);
-    //console.log(experiment);
-    eTitle = experiment?.title;
-    eType = experiment?.type;
-    eDescription = experiment?.description;
-    ePitches = experiment?.pitches;
+  	onMount (() => {
+		const urlParams = new URLSearchParams(window.location.search);
+		eId = urlParams.get('experiment');
+		experiment = experiments.find(exp => exp.id === eId);
+		console.log(eId);
+		console.log(experiment?.title);
+		//console.log(experiment);
+		eTitle = experiment?.title;
+		eType = experiment?.type;
+		eDescription = experiment?.description;
+		ePitches = experiment?.pitches;
 
-  });
+		startTime = new Date();
+		route = window.location.href;
+		clicks = 0;
+		document.addEventListener('click', () => (clicks++));
+  	});
+
+  	onDestroy(() => {
+		const endTime = new Date();
+		const timeSpent = endTime - startTime;
+		trackPage(route, timeSpent, clicks);
+  	});
 
 </script>
 
@@ -120,7 +134,8 @@ Sophia Humps (Project Leader) and Nina Junker (Supervisor)
 	<button class="styled-button" disabled={!$consentForStudy || !$consentForData}
 		on:click={() => {
 			if ($page.url.searchParams.has('experiment')) {
-				goto('/experiment/' + $page.url.searchParams.get('experiment') + '/explanation');
+				let targetRoute = '/experiment/' + $page.url.searchParams.get('experiment') + '/explanation'
+				goto(targetRoute);
 			} else {
 				invalidLink = true;
 			}

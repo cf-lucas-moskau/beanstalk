@@ -24,7 +24,7 @@
         <h2>{project.name}</h2>
         <p class="card-description">{truncateText(project.teamDescription, 20)}</p>
         <a href={`/experiment/${$currentExperiment}/${project.id}`} class="learn-more">
-            Mehr erfahren
+            Learn more
         </a>
       </div>
     {/each}

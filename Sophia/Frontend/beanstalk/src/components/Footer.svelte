@@ -30,15 +30,20 @@ import {investments} from "../stores/investment";
     <a href="/privacy-policy">Privacy Policy</a>
     <a href="/terms-of-service">Terms of Service</a>
     <a href="/contact">Contact Us</a>
-    <button on:click={() => {
-        consentForStudy.set(!$consentForStudy);
-    }}>{$consentForStudy}</button>
-    <button on:click={() => {
-        consentForData.set(!$consentForData);
-    }}>{$consentForData}</button>
-    <p>Current Experiment: {$currentExperiment} {#each $investments as investment, i}
-        <p>{investment.pitchId} {investment.amount}</p>
-    {/each}</p>
+
+<!--    Already on the page, no need for two sets of controls-->
+<!--    <button on:click={() => {-->
+<!--        consentForStudy.set(!$consentForStudy);-->
+<!--    }}>{$consentForStudy}</button>-->
+<!--    <button on:click={() => {-->
+<!--        consentForData.set(!$consentForData);-->
+<!--    }}>{$consentForData}</button>-->
     
+<!--    <p>Current Experiment: {$currentExperiment}-->
+<!--      {#each $investments as investment, i}-->
+<!--        <p>{investment.pitchId} {investment.amount}</p>-->
+<!--      {/each}-->
+<!--    </p>-->
+<!--    -->
   </footer>
   
