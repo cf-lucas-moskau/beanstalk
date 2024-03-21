@@ -131,7 +131,8 @@ Sophia Humps (Project Leader) and Nina Junker (Supervisor)
 	<button class="styled-button" disabled={!$consentForStudy || !$consentForData}
 		on:click={() => {
 			if ($page.url.searchParams.has('experiment')) {
-				goto('/experiment/' + $page.url.searchParams.get('experiment') + '/explanation');
+				let targetRoute = '/experiment/' + $page.url.searchParams.get('experiment') + '/explanation'
+				goto(targetRoute);
 			} else {
 				invalidLink = true;
 			}
