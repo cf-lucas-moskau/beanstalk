@@ -27,7 +27,6 @@
 
       console.log('Test page tracking begin:\n');
       console.log($pageTracking);
-      //console.log($pageTracking[0].length);
       console.log('\nTest page tracking end.');
       startTime = new Date();
       clicks = 0;
@@ -38,6 +37,8 @@
       const endTime = new Date();
       const timeSpent = endTime - startTime;
       trackPage(route, timeSpent, clicks);
+      console.log("clicks here post destroy:");
+      console.log($pageTracking);
     });
 
     if ($currentExperiment !== '') {

@@ -4,7 +4,7 @@
     import { onMount, onDestroy} from 'svelte';
     import {currentExperiment, shuffledList} from "../../../stores/current-experiment.js";
     import {pitches} from "../../../data.js";
-    import { trackPage } from "../../../stores/page-tracker.js";
+    import { trackPage, pageTracking } from "../../../stores/page-tracker.js";
   
     export let data;
     let finishClicked = false;
@@ -34,6 +34,7 @@
         const endTime = new Date();
         const timeSpent = endTime - startTime;
         trackPage(route, timeSpent, clicks);
+        console.log('clicks saved', $pageTracking);
     });
 
 

@@ -28,6 +28,7 @@
 		const endTime = new Date();
 		const timeSpent = endTime - startTime;
 		trackPage(route, timeSpent, clicks);
+
 	});
 
 </script>
