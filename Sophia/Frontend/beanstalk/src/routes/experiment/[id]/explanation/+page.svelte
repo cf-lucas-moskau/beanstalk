@@ -1,6 +1,6 @@
 <script>
     import {experiments} from '../../../../../src/data';
-	import { pageTracking, trackPageTime} from "../../../../stores/time-tracker";
+	import { trackPage } from "../../../../stores/page-tracker.js";
     import {onMount, onDestroy} from 'svelte';
 	import { goto } from '$app/navigation';
 
@@ -10,6 +10,7 @@
 
 	let startTime;
 	let route;
+	let clicks;
 
     console.log('Experiment test');
     onMount (() => {
@@ -17,15 +18,16 @@
         const urlP = window.location.pathname.split('/');
         eId = urlP[(urlP.length)-2];
         experiment = experiments.find(exp => exp.id === eId);
-
 		startTime = new Date();
 		route = window.location.href;
+		clicks = 0;
+		document.addEventListener('click', () => (clicks++));
     });
 
 	onDestroy(() => {
 		const endTime = new Date();
 		const timeSpent = endTime - startTime;
-		trackPageTime(route, timeSpent);
+		trackPage(route, timeSpent, clicks);
 	});
 
 </script>

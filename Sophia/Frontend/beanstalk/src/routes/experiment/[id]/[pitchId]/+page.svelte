@@ -2,7 +2,7 @@
     import {onDestroy, onMount} from 'svelte';
     import { goto } from '$app/navigation';
 
-    import { pageTracking, trackPageTime} from "../../../../stores/time-tracker";
+    import { pageTracking, trackPage} from "../../../../stores/page-tracker";
     import { currentExperiment } from '../../../../stores/current-experiment.js';
     import { experiments } from '../../../../data.js';
     import InvestmentForm from '../../../../components/InvestmentForm.svelte';
@@ -14,6 +14,7 @@
 
     let route = 'testHereRoute';
     let startTime;
+    let clicks;
 
     onMount(async () => {
       pitch = data.pitch
@@ -29,12 +30,14 @@
       //console.log($pageTracking[0].length);
       console.log('\nTest page tracking end.');
       startTime = new Date();
+      clicks = 0;
+      document.addEventListener('click', () => (clicks++));
     });
 
     onDestroy(() => {
       const endTime = new Date();
       const timeSpent = endTime - startTime;
-      trackPageTime(route, timeSpent);
+      trackPage(route, timeSpent, clicks);
     });
 
     if ($currentExperiment !== '') {

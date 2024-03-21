@@ -4,13 +4,14 @@
     import { onMount, onDestroy} from 'svelte';
     import {currentExperiment, shuffledList} from "../../../stores/current-experiment.js";
     import {pitches} from "../../../data.js";
-    import {trackPageTime} from "../../../stores/time-tracker.js";
+    import { trackPage } from "../../../stores/page-tracker.js";
   
     export let data;
     let finishClicked = false;
 
     let startTime;
     let route;
+    let clicks;
 
     if ($currentExperiment == '') {
       // @ts-ignore
@@ -22,16 +23,17 @@
     }
 
     onMount(() => {
-       console.log('onMount called');
-
-        startTime = new Date();
-        route = window.location.href;
+      console.log('onMount called');
+      clicks = 0;
+      startTime = new Date();
+      route = window.location.href;
+      document.addEventListener('click', () => (clicks++));
     });
 
     onDestroy(() => {
         const endTime = new Date();
         const timeSpent = endTime - startTime;
-        trackPageTime(route, timeSpent);
+        trackPage(route, timeSpent, clicks);
     });
 
 

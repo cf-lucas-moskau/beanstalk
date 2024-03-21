@@ -1,21 +1,24 @@
 <script>
 	import {onMount, onDestroy} from "svelte";
-	import {trackPageTime} from "../../stores/time-tracker.js";
+	import { trackPage } from "../../stores/page-tracker.js";
 
 	let startTime;
 	let route;
+	let clicks;
+
 
 	onMount(() => {
 		console.log('onMount called');
-
 		startTime = new Date();
 		route = window.location.href;
+		clicks = 0;
+		document.addEventListener('click', () => (clicks++));
 	});
 
 	onDestroy(() => {
 		const endTime = new Date();
 		const timeSpent = endTime - startTime;
-		trackPageTime(route, timeSpent);
+		trackPage(route, timeSpent, clicks);
 	});
 </script>
 
