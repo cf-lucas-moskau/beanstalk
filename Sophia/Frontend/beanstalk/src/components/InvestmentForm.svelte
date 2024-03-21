@@ -1,7 +1,7 @@
 <!-- src/components/InvestmentForm.svelte -->
 <script lang="ts">
 
-    import { investment, investments } from "../stores/investment"
+    import { investment, investments } from "../stores/investment";
     import ModalAlternative from "./ModalAlternative.svelte";
 
     let amount = 100;
