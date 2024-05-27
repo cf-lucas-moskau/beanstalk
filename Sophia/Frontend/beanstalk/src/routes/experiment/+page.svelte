@@ -1,41 +1,31 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { experiments } from '../../data.js';
+  import {onDestroy, onMount} from "svelte";
+  import { trackPage } from "../../stores/page-tracker";
 
-  let shuffled = false;
-  let copy = experiments;
+  let startTime;
+  let route;
+  let clicks;
 
-  //FIXME: Shuffles every time the page is renewed.
   onMount(() => {
-
-    if (!shuffled) {
-      console.log('test');
-      console.log(experiments[0].id);
-      copy = shuffle([...experiments]);
-      console.log(copy);
-      shuffled = true;
-    }
-    
+    console.log('onMount called');
+    startTime = new Date();
+    route = window.location.href;
+    clicks = 0;
+    document.addEventListener('click', () => (clicks++));
+  });
+  onDestroy(() => {
+    const endTime = new Date();
+    const timeSpent = endTime - startTime;
+    trackPage(route, timeSpent, clicks);
   });
 
-//Fisher-Yates shuffle from svelte documentation
-function shuffle(array) {
-  let currentIndex = array.length, randomIndex;
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-  }
-  return array;
-}
-
-  
 </script>
 
   <div class="container">
     <h1>Experiment List</h1>
     <div class="card-container">
-      {#each copy as exp}
+      {#each experiments as exp}
         <a href={`/experiment/${exp.id}`}>
           <div class="card">
             <h2>{exp.title}</h2>

@@ -2,23 +2,75 @@
 <script lang="ts">
 
     import { investment, investments } from "../stores/investment";
+    import ModalAlternative from "./ModalAlternative.svelte";
+
     let amount = 100;
+    let reason = '';
     let unsufficientFunds = false;
     let successfulInvestment = false;
+    let showModal;
 
 
     export let pitchId: string;
 
     $: amount > $investment ? unsufficientFunds = true : null;
-  
+
     function handleInvest() {
       console.log(`Investing: ${amount}` + ` in pitch` + pitchId);
-      $investments = [...$investments, { pitchId, amount }];
+      console.log('Reason from form: ' + `${reason}`);
+      $investments = [...$investments, { pitchId, amount, reason }];
       investment.reduce(_investment => _investment - amount);
       successfulInvestment = true;
+      reason = '';
+      showModal = false;
     }
   </script>
-  
+
+  <div class="investment-form">
+    <input
+      class="investment-input"
+      type="number"
+      step="10"
+      min="0"
+      placeholder="Enter investment amount"
+      bind:value="{amount}"
+    />
+    <!-- Fixed: now insufficient amount is checked every time the input is changed -->
+    {#if amount > $investment}
+    <div class="invalid-div">
+		<p>Insufficient Funds, lower investment</p>
+	</div>
+    {/if}
+    {#if successfulInvestment && !unsufficientFunds}
+    <div class="success-div">
+		<p>Success</p>
+	</div>
+    {/if}
+    <br/>
+
+    <button class="investment-button" disabled={amount > $investment || amount <= 0} on:click={() => (showModal = true)}>Invest</button>
+
+    {#if showModal}
+    <ModalAlternative bind:showModal>
+      <h2 slot="header">
+        Why do you want to invest?
+      </h2>
+      <textarea autofocus bind:value={reason} placeholder="Because this team rocks!"></textarea>
+      <div class="modal-actions">
+        <button class="investment-button" disabled={reason===''} on:click={handleInvest}>Invest</button>
+      </div>
+    </ModalAlternative>
+    {/if}
+
+    <p>{$investment} € left to invest</p>
+    {#each $investments as e, index}
+      {#if index !== 0}
+        <p>{e.amount} to pitch {e.pitchId} because: <br> {e.reason}</p>
+      {/if}
+    {/each}
+  </div>
+
+
   <style>
     .investment-form {
       display: flex;
@@ -56,15 +108,14 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-  
     .investment-button:hover {
       background-color: #1565c0;
     }
-  
+
     .investment-button:focus {
       outline: none;
     }
-  
+
     .investment-button:active {
       background-color: #0d47a1;
     }
@@ -89,29 +140,3 @@
         width: 100%
 	}
   </style>
-  
-  <div class="investment-form">
-    <input
-      class="investment-input"
-      type="number"
-      step="10"
-      min="0"
-      placeholder="Enter investment amount"
-      bind:value="{amount}"
-    />
-    {#if unsufficientFunds}
-    <div class="invalid-div">
-		<p>Unsufficient Funds, lower investment</p>
-	</div>
-    {/if}
-    {#if successfulInvestment}
-    <div class="success-div">
-		<p>Success</p>
-	</div>
-    {/if}
-    <p>{$investment} € left to invest</p>
-    <button class="investment-button" on:click="{handleInvest}" disabled={amount > $investment || amount <= 0}>
-      Invest
-    </button>
-  </div>
-  

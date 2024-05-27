@@ -1,18 +1,54 @@
 <script>
     import Money from "../../../components/Money.svelte";
     import ProjectCards from "../../../components/ProjectCards.svelte";
-  
-    import {currentExperiment} from "../../../stores/current-experiment.js";
+    import { onMount, onDestroy} from 'svelte';
+    import {currentExperiment, shuffledList} from "../../../stores/current-experiment.js";
+    import {pitches} from "../../../data.js";
+    import { trackPage, pageTracking } from "../../../stores/page-tracker.js";
   
     export let data;
     let finishClicked = false;
-  
-  
+
+    let startTime;
+    let route;
+    let clicks;
+
     if ($currentExperiment == '') {
       // @ts-ignore
       currentExperiment.changeValue(data.experiment.id);
     }
-  
+
+    if ($shuffledList.length === 0) {
+        shuffledList.shuffle(shuffle([...pitches]));
+    }
+
+    onMount(() => {
+      console.log('onMount called');
+      clicks = 0;
+      startTime = new Date();
+      route = window.location.href;
+      document.addEventListener('click', () => (clicks++));
+    });
+
+    onDestroy(() => {
+        const endTime = new Date();
+        const timeSpent = endTime - startTime;
+        trackPage(route, timeSpent, clicks);
+        console.log('clicks saved', $pageTracking);
+    });
+
+
+    //Fisher-Yates shuffle from svelte documentation
+    function shuffle(array) {
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex !== 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        }
+        return array;
+    }
+
   </script>
   
   <div class="container">
@@ -28,18 +64,14 @@
                 }}>Continue</button>
                 <button class="end-button">Finish</button>
             </p>
-            
         {/if}
     </div>
-      
-      {#if data.experiment.type == 'investment'} 
-  
-      <Money currency={'€'} />
-  {/if}
-  
-  <div>
-      <ProjectCards pitches={data.pitches} />
-  </div>
+      {#if data.experiment.type == 'investment'}
+        <Money currency={'€'} />
+      {/if}
+    <div>
+      <ProjectCards pitches={$shuffledList} />
+    </div>
   </div>
   
   
@@ -73,6 +105,7 @@
         letter-spacing: 1px;
         cursor: pointer;
         transition: background-color 0.3s ease;
+        text-transform: uppercase;
     }
       .container {
           width: 100%;
@@ -116,4 +149,5 @@
         opacity: 0.5;
         cursor: not-allowed;
     }
+
   </style>

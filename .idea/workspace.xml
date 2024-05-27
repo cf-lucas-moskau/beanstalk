@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ee4d7543-5481-44c1-93b5-d1bda05f9c82" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="PopupDialog" />
+        <option value="Dialog" />
+        <option value="PopupModal" />
+        <option value="Popup" />
+        <option value="Modal" />
+        <option value="ModalAlternative" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Sophia/Frontend/beanstalk/src/stores/investment.js" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2ctXh3OmiBGfO8S8OJlwmZzdw61" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ekin&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/mekintosh/cloudfood/projects/beanstalk&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.JavaScript&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/mekintosh/cloudfood/projects/beanstalk/Sophia/Frontend/beanstalk/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Sophia/Frontend/beanstalk/src/routes/experiment/[id]" />
+      <recent name="$PROJECT_DIR$/Sophia/Frontend/beanstalk/src/routes/experiment" />
+      <recent name="$PROJECT_DIR$/Sophia/Frontend/beanstalk/src/routes/experiment/explanation" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ee4d7543-5481-44c1-93b5-d1bda05f9c82" name="Changes" comment="" />
+      <created>1708931964534</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1708931964534</updated>
+      <workItem from="1708931965923" duration="2502000" />
+      <workItem from="1708934547108" duration="19615000" />
+      <workItem from="1708957042690" duration="387000" />
+      <workItem from="1709015225601" duration="16746000" />
+      <workItem from="1709037091398" duration="6737000" />
+      <workItem from="1709100869717" duration="25247000" />
+      <workItem from="1709192620130" duration="22899000" />
+      <workItem from="1709619668113" duration="21850000" />
+      <workItem from="1709705924982" duration="36936000" />
+      <workItem from="1709883117530" duration="8401000" />
+      <workItem from="1710150065292" duration="25950000" />
+      <workItem from="1711009872779" duration="3474000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
